@@ -17,7 +17,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>⚡ Thunderstudy | CBT</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="manifest" href="data:application/manifest+json;base64,eyJuYW1lIjogIlRodW5kZXJzdHVkeSIsICJzaG9ydF9uYW1lIjogIlRodW5kZXJzdHVkeSIsICJzdGFydF91cmwiOiAiLiIsICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLCAiYmFja2dyb3VuZF9jb2xvciI6ICIjMGYxNzJhIiwgInRoZW1lX2NvbG9yIjogIiM0ZjZlZjciLCAiZGVzY3JpcHRpb24iOiAiVGh1bmRlcnN0dWR5IENCVCBQbGF0Zm9ybSIsICJpY29ucyI6IFtdfQ==">
+    <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#4f6ef7">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -26,6 +26,17 @@
 <link rel="apple-touch-icon" href="favicon.svg">
 <meta name="application-name" content="Thunderstudy">
 <meta name="msapplication-TileColor" content="#4f6ef7">
+    <meta name="msapplication-TileImage" content="favicon.svg">
+<meta name="msapplication-config" content="none">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="format-detection" content="telephone=no">
+<meta name="description" content="Your complete CUET preparation dashboard. Track scores, analytics, class rank and more.">
+<meta property="og:title" content="Thunderstudy — CUET Dashboard">
+<meta property="og:description" content="Track your CUET prep — scores, analytics, rank and more.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://commercesehoga.github.io/cuet/">
+<meta property="og:image" content="https://commercesehoga.github.io/cuet/icon.svg">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=DM+Mono:wght@400;500&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -13250,22 +13261,38 @@ if ('serviceWorker' in navigator) {
           });
         });
       })
-      .catch(function (err) {
+     .catch(function (err) {
         console.log('SW failed:', err);
       });
 
+    // Register periodic background sync after SW is ready
+    setTimeout(registerPeriodicSync, 5000);
+
     navigator.serviceWorker.addEventListener('message', function (e) {
-      if (e.data && e.data.type === 'TS_UPDATE_READY') {
-        showUpdateBar();
-      }
-    });
+  if (!e.data) return;
+
+  // New version activated → show update popup
+  if (e.data.type === 'TS_UPDATE_READY') {
+    showUpdateBar(e.data.version || '');
+  }
+
+  // SW confirmed cache was cleared
+  if (e.data.type === 'CACHE_CLEARED') {
+    showToast('<svg class="ts-svg-icon" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Cache cleared (' + (e.data.version || 'SW') + ')', 'success', 3000);
+  }
+
+  // SW replied with its version
+  if (e.data.type === 'SW_VERSION') {
+    console.log('[App] SW running version:', e.data.version);
+  }
+});
   });
 }
 
-function showUpdateBar() {
+function showUpdateBar(version) {
   if (document.getElementById('ts-update-popup')) return;
-  // Queue the update popup — to be shown before admin notice
   window._pendingUpdatePopup = true;
+  window._pendingUpdateVersion = version || '';
   _showUpdatePopupNow();
 }
 
@@ -13283,8 +13310,9 @@ function _showUpdatePopupNow() {
     <div style="font-size:52px;margin-bottom:10px;"><svg class="ts-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
     <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--acc);margin-bottom:8px;">App Update Ready</div>
     <div style="font-size:20px;font-weight:900;color:var(--text);margin-bottom:10px;letter-spacing:-.3px;">Thunderstudy just got better!</div>
-    <div style="font-size:13px;color:var(--text3);line-height:1.7;margin-bottom:22px;">A new version of Thunderstudy is available with improvements and bug fixes. Update now to get the latest experience.</div>
-    <div style="display:flex;flex-direction:column;gap:9px;">
+${window._pendingUpdateVersion ? `<div style="display:inline-block;background:rgba(79,110,247,.1);border:1.5px solid rgba(79,110,247,.25);border-radius:20px;padding:3px 14px;font-size:11px;font-weight:800;color:var(--acc);margin-bottom:10px;">${window._pendingUpdateVersion}</div>` : ''}
+<div style="font-size:13px;color:var(--text3);line-height:1.7;margin-bottom:22px;">A new version of Thunderstudy is available with improvements and bug fixes. Update now to get the latest experience.</div>
+     <div style="display:flex;flex-direction:column;gap:9px;">
       <button onclick="applyUpdate()" style="width:100%;padding:13px;border-radius:15px;border:none;cursor:pointer;background:linear-gradient(135deg,#4f6ef7,#7c3aed);color:#fff;font-size:14px;font-weight:800;font-family:var(--fn);box-shadow:0 6px 20px rgba(79,110,247,.3);"><svg class="ts-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Update Now</button>
       <button onclick="document.getElementById('ts-update-popup').remove()" style="width:100%;padding:11px;border-radius:15px;border:1.5px solid var(--border);cursor:pointer;background:var(--card2);color:var(--text2);font-size:12px;font-weight:700;font-family:var(--fn);">Close App</button>
     </div>
@@ -13299,6 +13327,42 @@ function applyUpdate() {
       reg.waiting.postMessage({ type: 'SKIP_WAITING' });
     }
     window.location.reload();
+  });
+}
+    /* ── Clear SW cache from app (e.g. Settings button) ── */
+function clearSWCache() {
+  if (!('serviceWorker' in navigator)) return;
+  navigator.serviceWorker.ready.then(function(reg) {
+    if (reg && reg.active) {
+      reg.active.postMessage({ type: 'CLEAR_CACHE' });
+    }
+  });
+}
+
+/* ── Register periodic background sync (call once after SW ready) ── */
+async function registerPeriodicSync() {
+  if (!('serviceWorker' in navigator) || !('periodicSync' in ServiceWorkerRegistration.prototype)) return;
+  try {
+    const reg = await navigator.serviceWorker.ready;
+    const status = await navigator.permissions.query({ name: 'periodic-background-sync' });
+    if (status.state === 'granted') {
+      await reg.periodicSync.register('ts-refresh-notices', {
+        minInterval: 60 * 60 * 1000 // every 1 hour minimum
+      });
+      console.log('[App] Periodic sync registered');
+    }
+  } catch (err) {
+    console.log('[App] Periodic sync not supported:', err);
+  }
+}
+
+/* ── Ask SW for its running version (for debug/settings display) ── */
+function getSWVersion() {
+  if (!('serviceWorker' in navigator)) return;
+  navigator.serviceWorker.ready.then(function(reg) {
+    if (reg && reg.active) {
+      reg.active.postMessage({ type: 'GET_VERSION' });
+    }
   });
 }
 
