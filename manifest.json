@@ -1,0 +1,87 @@
+{
+  "id": "thunderstudy-cuet",
+  "name": "Thunderstudy — CUET Dashboard",
+  "short_name": "Thunderstudy",
+  "description": "Your complete CUET preparation dashboard. Track scores, analytics, class rank and more.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "orientation": "portrait-primary",
+  "background_color": "#f0f3fa",
+  "theme_color": "#4f6ef7",
+  "lang": "en-IN",
+  "dir": "ltr",
+  "categories": ["education", "productivity"],
+  "prefer_related_applications": false,
+  "related_applications": [],
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    },
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "screenshot-mobile.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Thunderstudy home dashboard on mobile"
+    },
+    {
+      "src": "screenshot-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Thunderstudy full dashboard on desktop"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Scoreboard",
+      "short_name": "Scores",
+      "description": "View your scores and chapter results",
+      "url": "./?page=scoreboard",
+      "icons": [{ "src": "favicon.svg", "sizes": "any" }]
+    },
+    {
+      "name": "Analytics",
+      "short_name": "Analytics",
+      "description": "View analytics and weak chapters",
+      "url": "./?page=analytics",
+      "icons": [{ "src": "favicon.svg", "sizes": "any" }]
+    },
+    {
+      "name": "Subjects",
+      "short_name": "Subjects",
+      "description": "Chapter-wise scores per subject",
+      "url": "./?page=subjects",
+      "icons": [{ "src": "favicon.svg", "sizes": "any" }]
+    },
+    {
+      "name": "Class Rank",
+      "short_name": "Rank",
+      "description": "Live class leaderboard and rank",
+      "url": "./?page=rank",
+      "icons": [{ "src": "favicon.svg", "sizes": "any" }]
+    }
+  ],
+  "edge_side_panel": {
+    "preferred_width": 400
+  }
+}
