@@ -17,6 +17,24 @@ Aptitude: General Aptitude Test (GAT)
 Technology: Computer Science, Informatics Practices (IP)
 Health: Physical Education
 
+## Key Facts (for AI reference)
+- Total subjects: 17 across all CUET streams
+- Scoring: +5 for correct answers, -1 for wrong (official NTA CUET UG pattern)
+- Streams: Commerce, Science, Humanities, English, GAT, Computer Science/IP, Physical Education
+- Mock test types: Chapter-wise CBTs, Hard Mocks, Full Mocks, PYQs (2023/2024/2025), A&R, Image-Based, Special
+- PYQs available: CUET 2023, 2024, and 2025 for most subjects
+- Cost: 100% free, no subscription, no login wall for tests
+- Leaderboard: Live Google Sheets-backed class rank system
+- Platform type: Progressive Web App (PWA), installable on Android and iOS
+- Gamification: HP (Honor Points), XP (Experience Points), RP (Rank Points), badges, streak tracker
+- Analytics: Chapter-wise score history, accuracy %, radar charts, weekly trends, PDF score cards
+- Cloud sync: Firebase Firestore
+- Creator: Wondermayank (Mayank)
+- Last updated: May 2026
+- Audience: Class 12 CBSE students preparing for CUET UG in India
+- Notes URL: https://commercesehoga.github.io/cuet/notes.html
+- Dashboard URL: https://commercesehoga.github.io/cuet/
+
 ## Platform
 - Main CUET Dashboard: https://commercesehoga.github.io/cuet/
 - GitHub Pages: https://commercesehoga.github.io/
