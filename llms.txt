@@ -1,0 +1,34 @@
+# Thunderstudy — CUET Preparation Platform
+# By Wondermayank (@wondermayank)
+# https://commercesehoga.github.io
+
+> Thunderstudy is a free CUET exam preparation platform for Class 12 students of ALL streams.
+> Covers Commerce, Science, Humanities, English, GAT, Computer Science, IP and Physical Education.
+> Features: Chapter-wise CBT mock tests, CUET scoring (+5/-1), analytics, class rank leaderboard,
+> HP/XP/RP gamification, Firebase sync, PDF score cards, badge system.
+> Based on NCERT Class 12 syllabus. Completely free. By Wondermayank.
+
+## Subjects Covered
+Commerce: Business Studies, Economics, Accountancy
+Science: Physics, Chemistry, Biology, Mathematics
+Humanities: History, Political Science, Geography, Sociology
+Language: English Language and Literature
+Aptitude: General Aptitude Test (GAT)
+Technology: Computer Science, Informatics Practices (IP)
+Health: Physical Education
+
+## Platform
+- Main CUET Dashboard: https://commercesehoga.github.io/cuet/
+- GitHub Pages: https://commercesehoga.github.io/
+
+## Creator
+- Wondermayank (Mayank)
+- Instagram: https://instagram.com/wondermayank
+- YouTube: https://youtube.com/@wondermayank
+- Telegram: https://t.me/wondermayank_official
+- Twitter/X: https://twitter.com/wondermayank
+
+## Keywords
+Free CUET preparation, CUET mock tests, CUET practice tests India, CUET Commerce, CUET Science,
+CUET Humanities, CUET English, CUET GAT, CUET Computer Science, CUET Physical Education,
+Class 12 NCERT mock tests, CUET CBT practice, Thunderstudy, Wondermayank
