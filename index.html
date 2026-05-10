@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en-IN">
     
@@ -905,6 +906,7 @@ body.dark-mode .sc-x{background:#1c1c2e;}
 .dock-item:nth-child(5){animation:dockItemIn .4s .25s cubic-bezier(.34,1.56,.64,1) both;}
 .dock-item:nth-child(6){animation:dockItemIn .4s .30s cubic-bezier(.34,1.56,.64,1) both;}
 .dock-item:nth-child(7){animation:dockItemIn .4s .35s cubic-bezier(.34,1.56,.64,1) both;}
+.dock-item:nth-child(8){animation:dockItemIn .4s .40s cubic-bezier(.34,1.56,.64,1) both;}
 @keyframes dockItemIn{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
   .dock-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:0;cursor:pointer;position:relative;height:64px;-webkit-tap-highlight-color:transparent;transition:opacity .15s;}
   .dock-item:active{opacity:.7;}
@@ -2145,6 +2147,7 @@ if(i === stepData.length - 1){
   <span>Support Us</span>
 </div>
     <div class="nav-item" onclick="goPage('settings')"><span class="nav-icon"><svg class="ts-svg-icon" data-icon="gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg></span> Settings<span class="sync-dot" id="sync-dot-nav" title="Sync status"></span></div>
+    <div class="nav-item" id="nav-more" onclick="goPage('more')"><span class="nav-icon"><svg class="ts-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg></span> More</div>
   </div>
   <div class="sb-profile" onclick="openProfileModal()">
     <div class="sb-av" id="sb-av-disp">S</div>
@@ -2210,6 +2213,13 @@ if(i === stepData.length - 1){
       <div><div class="page-title"><svg class="ts-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg>️ Settings</div><div class="page-sub">Manage preferences, data & sync</div></div>
     </div>
     <div id="settings-content"></div>
+  </div>
+
+  <div class="page" id="page-more">
+    <div class="topbar">
+      <div><div class="page-title"><svg class="ts-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg> More</div><div class="page-sub">Notes, FAQ &amp; StudyHub</div></div>
+    </div>
+    <div id="more-content"></div>
   </div>
 
   <!-- ══ SITE FOOTER ══ -->
@@ -2680,6 +2690,11 @@ if(i === stepData.length - 1){
     <div class="dock-bubble"><svg class="ts-svg-icon" data-icon="gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg></div>
     <span class="dock-icon"><svg class="ts-svg-icon" data-icon="gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg></span>
     <span class="dock-label">Settings</span>
+  </div>
+  <div class="dock-item" id="dock-more" onclick="goPage('more')">
+    <div class="dock-bubble"><svg class="ts-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg></div>
+    <span class="dock-icon"><svg class="ts-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg></span>
+    <span class="dock-label">More</span>
   </div>
 </nav>
 
@@ -5021,10 +5036,10 @@ document.querySelectorAll('.dock-item').forEach(d=>d.classList.remove('active'))
     // pages not in main dock (mocks, settings) — no dock item highlights
   }
   destroyCharts();
-  const map={home:renderHome,scoreboard:renderScoreboard,subjects:renderSubjects,mocks:renderMocks,analytics:renderAnalytics,rank:renderRank,settings:renderSettings};
+  const map={home:renderHome,scoreboard:renderScoreboard,subjects:renderSubjects,mocks:renderMocks,analytics:renderAnalytics,rank:renderRank,settings:renderSettings,more:renderMore};
   if(map[id]){
   // Show skeleton first
-  const contentId={home:'home-content',scoreboard:'scoreboard-content',subjects:'subjects-content',mocks:'mocks-content',analytics:'analytics-content',rank:'rank-content',settings:'settings-content'}[id];
+  const contentId={home:'home-content',scoreboard:'scoreboard-content',subjects:'subjects-content',mocks:'mocks-content',analytics:'analytics-content',rank:'rank-content',settings:'settings-content',more:'more-content'}[id];
   if(contentId){
     const el=document.getElementById(contentId);
     if(el){
@@ -6105,6 +6120,38 @@ H+=`<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin
   H += buildSubjectHistoryStats(sv);
   H+=`<div class="sec-hdr" style="margin-top:20px;"><div class="sec-title"><svg class="ts-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg> Target Score Planner</div></div>${buildTargetSetter(sv)}`;
   setTimeout(()=>calcTarget(),150);
+  H += `
+<!-- ── FAQ SECTION ── -->
+<div class="card card-p" style="margin-top:20px;margin-bottom:8px;">
+  <div class="sec-hdr">
+    <div class="sec-title">
+      <svg class="ts-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      Frequently Asked Questions
+    </div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;" id="ts-faq">
+    <details style="border:1px solid var(--border);border-radius:12px;padding:13px 15px;background:var(--card2);">
+      <summary style="font-weight:800;font-size:13px;cursor:pointer;list-style:none;color:var(--text);">What is Thunderstudy?</summary>
+      <p style="margin-top:9px;font-size:12px;color:var(--text2);line-height:1.65;">Thunderstudy is a free CUET preparation platform by Wondermayank for Class 12 students of all streams — Commerce, Science, Humanities, English, GAT, Computer Science, IP, and Physical Education. It offers chapter-wise CBT mock tests, score analytics, a class rank leaderboard, and a gamified learning system.</p>
+    </details>
+    <details style="border:1px solid var(--border);border-radius:12px;padding:13px 15px;background:var(--card2);">
+      <summary style="font-weight:800;font-size:13px;cursor:pointer;list-style:none;color:var(--text);">Which CUET streams and subjects are covered?</summary>
+      <p style="margin-top:9px;font-size:12px;color:var(--text2);line-height:1.65;">Commerce (Business Studies, Economics, Accountancy), Science (Physics, Chemistry, Biology, Mathematics), Humanities (History, Political Science, Geography, Sociology), English Language, General Aptitude Test (GAT), Computer Science, Informatics Practices (IP), and Physical Education — all based on NCERT Class 12 syllabus.</p>
+    </details>
+    <details style="border:1px solid var(--border);border-radius:12px;padding:13px 15px;background:var(--card2);">
+      <summary style="font-weight:800;font-size:13px;cursor:pointer;list-style:none;color:var(--text);">Is Thunderstudy free?</summary>
+      <p style="margin-top:9px;font-size:12px;color:var(--text2);line-height:1.65;">Yes, completely free. All mock tests, analytics, and the class leaderboard are free with no subscription required.</p>
+    </details>
+    <details style="border:1px solid var(--border);border-radius:12px;padding:13px 15px;background:var(--card2);">
+      <summary style="font-weight:800;font-size:13px;cursor:pointer;list-style:none;color:var(--text);">How does the CUET scoring work?</summary>
+      <p style="margin-top:9px;font-size:12px;color:var(--text2);line-height:1.65;">Thunderstudy follows the official CUET pattern: +5 marks for each correct answer and −1 mark for each wrong answer. Scores, accuracy, and class ranks are saved automatically after every test.</p>
+    </details>
+    <details style="border:1px solid var(--border);border-radius:12px;padding:13px 15px;background:var(--card2);">
+      <summary style="font-weight:800;font-size:13px;cursor:pointer;list-style:none;color:var(--text);">Who made Thunderstudy?</summary>
+      <p style="margin-top:9px;font-size:12px;color:var(--text2);line-height:1.65;">Thunderstudy was created by Wondermayank — a developer and educator dedicated to helping Indian students crack CUET. Follow on Instagram and YouTube @wondermayank.</p>
+    </details>
+  </div>
+</div>`;
   document.getElementById('home-content').innerHTML=H;
   fetchProBanner();
   setTimeout(()=>showFooter(), 500);
@@ -8332,6 +8379,173 @@ function renderStorageCard() {
 function refreshStorageCard() {
     const el = document.getElementById('storage-card-wrap');
     if (el) el.outerHTML = `<div id="storage-card-wrap">${renderStorageCard()}</div>`;
+}
+
+/* ══════════════════════════════════════════
+   MORE PAGE — Notes · FAQ · StudyHub
+══════════════════════════════════════════ */
+function renderMore() {
+  const el = document.getElementById('more-content');
+  if (!el) return;
+
+  const sv = getSS();
+  const allSubjects = SUBJECTS_MASTER;
+  const mySubjects = sv.length
+    ? sv.map(sId => SUBJECTS_MASTER.find(s => s.id === sId)).filter(Boolean)
+    : SUBJECTS_MASTER;
+
+  // Subjects that have formula sheets
+  const formulaSubjects = [
+    { id: 'mat',  label: 'Mathematics',  icon: '📐', color: '#7c3aed' },
+    { id: 'amat', label: 'Applied Maths', icon: '📏', color: '#0ea5e9' },
+    { id: 'phy',  label: 'Physics',       icon: '⚛️',  color: '#6366f1' },
+    { id: 'che',  label: 'Chemistry',     icon: '🧪', color: '#14b8a6' },
+    { id: 'eco',  label: 'Economics',     icon: '📊', color: '#10b981' },
+    { id: 'gat',  label: 'GAT',           icon: '🧠', color: '#f59e0b' },
+  ];
+
+  // About CUET links
+  const aboutLinks = [
+    { slug: 'dress', label: 'Dress Code',        icon: '👔', color: '#4f6ef7', desc: 'What to wear on exam day' },
+    { slug: 'guide', label: 'Exam Guide',         icon: '📋', color: '#10b981', desc: 'Step-by-step exam day guide' },
+    { slug: 'rule',  label: 'Rules & Regulations',icon: '📜', color: '#f59e0b', desc: 'Do\'s and don\'ts at centre' },
+  ];
+
+  let H = `
+
+  <!-- ── FORMULA SHEETS ── -->
+  <div class="card card-p" style="margin-bottom:16px;">
+    <div class="sec-hdr">
+      <div class="sec-title">
+        <svg class="ts-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>
+        Formula Sheets
+      </div>
+      <span style="font-size:10px;color:var(--text3);">Quick reference</span>
+    </div>
+    <div class="mock-grid" style="margin-top:10px;">
+      ${formulaSubjects.map(f => {
+        const url = (SUBJECT_URLS[f.id] || '') + 'formula.html';
+        return `
+        <div class="mock-card" onclick="window.open('${url}','_blank')">
+          <div style="width:36px;height:36px;border-radius:9px;background:rgba(79,110,247,.08);display:flex;align-items:center;justify-content:center;font-size:17px;margin-bottom:8px;">${f.icon}</div>
+          <div class="mock-title">${f.label}</div>
+          <div class="mock-subj" style="color:${f.color};">Formula Sheet</div>
+          <div style="font-size:11px;color:var(--text3);margin-top:4px;">Tap to open ↗</div>
+        </div>`;
+      }).join('')}
+    </div>
+  </div>
+
+  <!-- ── STUDY NOTES (MY SUBJECTS) ── -->
+  <div class="card card-p" style="margin-bottom:16px;">
+    <div class="sec-hdr">
+      <div class="sec-title">
+        <svg class="ts-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+        My Subject Notes
+      </div>
+      <span style="font-size:10px;color:var(--text3);">Your subjects only</span>
+    </div>
+    <div class="mock-grid" style="margin-top:10px;">
+      ${mySubjects.map(s => {
+        const url = (SUBJECT_URLS[s.id] || '') + 'notes.html';
+        return `
+        <div class="mock-card" onclick="window.open('${url}','_blank')">
+          <div style="width:36px;height:36px;border-radius:9px;background:rgba(79,110,247,.08);display:flex;align-items:center;justify-content:center;font-size:17px;margin-bottom:8px;">${s.icon}</div>
+          <div class="mock-title">${s.name}</div>
+          <div class="mock-subj" style="color:${s.color||'var(--acc)'};">Study Notes</div>
+          <div style="font-size:11px;color:var(--text3);margin-top:4px;">Tap to open ↗</div>
+        </div>`;
+      }).join('')}
+    </div>
+  </div>
+
+  <!-- ── ALL SUBJECT NOTES ── -->
+  <div class="card card-p" style="margin-bottom:16px;">
+    <div class="sec-hdr">
+      <div class="sec-title">
+        <svg class="ts-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        All Subject Notes
+      </div>
+      <span style="font-size:10px;color:var(--text3);">Every stream</span>
+    </div>
+    <div class="mock-grid" style="margin-top:10px;">
+      ${allSubjects.map(s => {
+        const url = (SUBJECT_URLS[s.id] || '') + 'notes.html';
+        return `
+        <div class="mock-card" onclick="window.open('${url}','_blank')">
+          <div style="width:36px;height:36px;border-radius:9px;background:rgba(79,110,247,.08);display:flex;align-items:center;justify-content:center;font-size:17px;margin-bottom:8px;">${s.icon}</div>
+          <div class="mock-title">${s.name}</div>
+          <div class="mock-subj" style="color:${s.color||'var(--acc)'};">Study Notes</div>
+          <div style="font-size:11px;color:var(--text3);margin-top:4px;">Tap to open ↗</div>
+        </div>`;
+      }).join('')}
+    </div>
+  </div>
+
+  <!-- ── ABOUT CUET ── -->
+  <div class="card card-p" style="margin-bottom:16px;">
+    <div class="sec-hdr">
+      <div class="sec-title">
+        <svg class="ts-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        About CUET
+      </div>
+      <span style="font-size:10px;color:var(--text3);">Exam day info</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:9px;margin-top:10px;">
+      ${aboutLinks.map(a => `
+      <a href="https://commercesehoga.github.io/cuet/about/${a.slug}" target="_blank" rel="noopener"
+        style="display:flex;align-items:center;gap:13px;padding:13px 15px;border-radius:14px;
+          border:1.5px solid var(--border);background:var(--card2);text-decoration:none;
+          transition:all .18s;" 
+        onmouseenter="this.style.borderColor='var(--acc)';this.style.background='rgba(79,110,247,.04)'"
+        onmouseleave="this.style.borderColor='var(--border)';this.style.background='var(--card2)'">
+        <div style="width:40px;height:40px;border-radius:12px;background:${a.color};
+          display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0;">
+          ${a.icon}
+        </div>
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:13px;font-weight:800;color:var(--text);">${a.label}</div>
+          <div style="font-size:11px;color:var(--text3);margin-top:2px;">${a.desc}</div>
+        </div>
+        <svg class="ts-svg-icon" viewBox="0 0 24 24" fill="none" stroke="var(--text3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="9 18 15 12 9 6"/></svg>
+      </a>`).join('')}
+    </div>
+  </div>
+
+  <!-- ── FAQ ── -->
+  <div class="card card-p" style="margin-bottom:16px;">
+    <div class="sec-hdr">
+      <div class="sec-title">
+        <svg class="ts-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        FAQ
+      </div>
+      <a href="https://commercesehoga.github.io/fqa" target="_blank" rel="noopener"
+        style="font-size:10px;color:var(--acc);font-weight:700;text-decoration:none;">Open full page ↗</a>
+    </div>
+    <div style="margin-top:10px;border-radius:14px;overflow:hidden;border:1px solid var(--border);min-height:220px;background:var(--card2);">
+      <iframe src="https://commercesehoga.github.io/fqa"
+        style="width:100%;height:420px;border:none;border-radius:14px;display:block;"
+        loading="lazy" title="Thunderstudy FAQ"></iframe>
+    </div>
+  </div>
+
+  <!-- ── STUDYHUB ── -->
+  <div class="card card-p" style="margin-bottom:16px;">
+    <div class="sec-hdr">
+      <div class="sec-title">
+        <svg class="ts-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+        StudyHub
+      </div>
+    </div>
+    <p style="font-size:12px;color:var(--text2);margin:10px 0 14px;line-height:1.6;">Access your personalised study hub — resources, revision materials and more, all in one place.</p>
+    <a href="https://commercesehoga.github.io/studyhub" target="_blank" rel="noopener"
+      class="btn btn-prim" style="display:inline-flex;align-items:center;gap:7px;font-size:13px;width:100%;justify-content:center;padding:13px;">
+      <svg class="ts-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      Open StudyHub
+    </a>
+  </div>`;
+
+  el.innerHTML = H;
 }
 
 function renderSettings(){
