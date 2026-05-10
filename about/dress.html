@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CUET 2025 – Dress Code Guide | ThunderStudy</title>
+<link rel="icon" type="image/svg+xml" href="https://wondermayank.github.io/Fevicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --p6:#7C3AED;--p5:#8B5CF6;--p4:#A78BFA;--p3:#C4B5FD;--p2:#DDD6FE;--p1:#EDE9FE;--p0:#F5F3FF;
+  --b4:#60A5FA;--b3:#93C5FD;--b2:#BFDBFE;--b1:#DBEAFE;--bc:#B9D9DC;
+  --g9:#111827;--g7:#374151;--g5:#6B7280;--g3:#D1D5DB;--g1:#F3F4F6;
+  --ok:#22C55E;--okl:#DCFCE7;--okd:#15803D;
+  --no:#EF4444;--nol:#FEE2E2;--nod:#B91C1C;
+  --skin:#F5C9A0;--skind:#EFBA90;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:#F7F5FF;color:var(--g9);overflow-x:hidden}
+
+/* BOOT */
+#boot{position:fixed;inset:0;z-index:9999;background:linear-gradient(140deg,#EDE9FE,#EFF6FF 55%,#F5F3FF);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;transition:opacity .65s ease,transform .65s ease}
+#boot.hide{opacity:0;transform:scale(1.05);pointer-events:none}
+.bl{display:flex;align-items:center;gap:12px;animation:bup .7s ease both}
+.bicon{width:52px;height:52px}
+.bname{font-family:'Syne',sans-serif;font-weight:800;font-size:2rem;background:linear-gradient(135deg,var(--p6),var(--b4));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.bsub{font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--g5);animation:bup .7s .15s ease both}
+.btrack{width:190px;height:4px;border-radius:99px;background:var(--p2);overflow:hidden;animation:bup .7s .28s ease both}
+.bfill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--p6),var(--b4));width:0;animation:bfill 2.1s .35s cubic-bezier(.4,0,.2,1) forwards}
+@keyframes bfill{to{width:100%}}
+@keyframes bup{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+/* MAIN */
+#main{opacity:0;transition:opacity .5s ease}
+#main.show{opacity:1}
+
+/* HEADER */
+header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--p1);padding:16px 24px;display:flex;align-items:center;justify-content:space-between}
+.hb{display:flex;align-items:center;gap:10px}
+.hb img{width:30px;height:30px}
+.hn{font-family:'Syne',sans-serif;font-weight:800;font-size:1.05rem;background:linear-gradient(135deg,var(--p6),var(--b4));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hbadge{background:linear-gradient(135deg,var(--p1),var(--b1));color:var(--p6);font-size:.76rem;font-weight:700;padding:5px 14px;border-radius:99px;border:1px solid var(--p2)}
+
+/* HERO */
+.hero{text-align:center;padding:60px 20px 36px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(167,139,250,.15),transparent 70%);pointer-events:none}
+.hpill{display:inline-flex;align-items:center;gap:7px;background:rgba(124,58,237,.08);border:1px solid var(--p2);color:var(--p6);padding:5px 15px;border-radius:99px;font-size:.76rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:18px;animation:fup .6s .05s ease both}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,5vw,3.2rem);font-weight:900;line-height:1.18;margin-bottom:10px;animation:fup .6s .15s ease both}
+.hero h1 span{background:linear-gradient(135deg,var(--p6),var(--b4));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hsub{color:var(--g5);font-size:1rem;max-width:440px;margin:0 auto;animation:fup .6s .25s ease both}
+@keyframes fup{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+
+/* RULES */
+.rules{max-width:880px;margin:40px auto;padding:0 20px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:580px){.rules{grid-template-columns:1fr}}
+.rc{background:rgba(255,255,255,.88);backdrop-filter:blur(12px);border-radius:22px;padding:22px;box-shadow:0 2px 20px rgba(124,58,237,.06);animation:fup .5s ease both}
+.rc.ok{border:1.5px solid rgba(34,197,94,.25)}
+.rc.no{border:1.5px solid rgba(239,68,68,.22)}
+.rchead{display:flex;align-items:center;gap:8px;margin-bottom:14px}
+.rbadge{display:inline-flex;align-items:center;gap:6px;padding:5px 13px;border-radius:99px;font-size:.78rem;font-weight:700}
+.ok .rbadge{background:var(--okl);color:var(--okd)}
+.no .rbadge{background:var(--nol);color:var(--nod)}
+.rl{list-style:none;display:flex;flex-direction:column;gap:7px}
+.rl li{display:flex;align-items:flex-start;gap:8px;font-size:.88rem;color:var(--g7);line-height:1.45}
+.rdot{width:17px;height:17px;border-radius:50%;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center}
+.ok .rdot{background:var(--okl)}.no .rdot{background:var(--nol)}
+
+/* SECTION TITLE */
+.stitle{text-align:center;margin-bottom:32px}
+.stitle .spill{display:inline-block;background:linear-gradient(135deg,var(--p1),var(--b1));border:1px solid var(--p2);color:var(--p6);font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 14px;border-radius:99px;margin-bottom:9px}
+.stitle h2{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:var(--g9);margin-bottom:5px}
+.stitle p{color:var(--g5);font-size:.9rem}
+
+/* FIGURE CARDS */
+.fsec{max-width:1060px;margin:0 auto 64px;padding:0 20px}
+.frow{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+@media(max-width:840px){.frow{grid-template-columns:1fr 1fr}}
+@media(max-width:440px){.frow{grid-template-columns:1fr}}
+.fc{background:rgba(255,255,255,.92);backdrop-filter:blur(16px);border-radius:26px;padding:24px 18px 20px;box-shadow:0 4px 28px rgba(124,58,237,.07);text-align:center;position:relative;overflow:hidden;animation:fup .5s ease both}
+.fc::after{content:'';position:absolute;top:-50px;right:-50px;width:150px;height:150px;border-radius:50%;opacity:.06;pointer-events:none}
+.fc.ok{border:1.5px solid rgba(34,197,94,.25)}.fc.ok::after{background:var(--ok)}
+.fc.no{border:1.5px solid rgba(239,68,68,.2)}.fc.no::after{background:var(--no)}
+.fwho{font-size:.72rem;font-weight:600;color:var(--g5);text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px}
+.flabel{display:inline-flex;align-items:center;gap:6px;font-family:'Syne',sans-serif;font-weight:800;font-size:.8rem;padding:5px 14px;border-radius:99px;margin-bottom:18px}
+.ok .flabel{background:var(--okl);color:var(--okd)}.no .flabel{background:var(--nol);color:var(--nod)}
+.fsvg{width:150px;height:290px;margin:0 auto 14px}
+.fsvg svg{width:100%;height:100%}
+.ftags{display:flex;flex-wrap:wrap;gap:5px;justify-content:center}
+.ftag{font-size:.7rem;font-weight:600;padding:3px 9px;border-radius:99px}
+.ok .ftag{background:rgba(34,197,94,.1);color:var(--okd);border:1px solid rgba(34,197,94,.18)}
+.no .ftag{background:rgba(239,68,68,.08);color:var(--nod);border:1px solid rgba(239,68,68,.14)}
+
+/* CTA */
+.cta{text-align:center;padding:40px 20px 60px}
+.ctabox{display:inline-flex;flex-direction:column;align-items:center;gap:13px;background:rgba(255,255,255,.92);backdrop-filter:blur(16px);border:1.5px solid var(--p2);border-radius:28px;padding:32px 42px;box-shadow:0 4px 36px rgba(124,58,237,.1)}
+.ctabox h3{font-family:'Syne',sans-serif;font-size:1.12rem;font-weight:800;color:var(--g9)}
+.ctabox p{color:var(--g5);font-size:.86rem;max-width:270px}
+.ctabtn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--p6),#8B5CF6);color:#fff;text-decoration:none;font-weight:700;font-size:.88rem;padding:12px 24px;border-radius:13px;box-shadow:0 4px 18px rgba(124,58,237,.32);transition:transform .2s,box-shadow .2s}
+.ctabtn:hover{transform:translateY(-2px);box-shadow:0 8px 26px rgba(124,58,237,.4)}
+
+/* FOOTER */
+footer{background:rgba(255,255,255,.7);border-top:1px solid var(--p1);text-align:center;padding:20px;font-size:.8rem;color:var(--g5)}
+footer a{color:var(--p6);text-decoration:none;font-weight:600}
+
+/* ORBS */
+.orb{position:fixed;border-radius:50%;pointer-events:none;opacity:.1;z-index:0;animation:orbf 9s ease-in-out infinite alternate}
+.o1{width:360px;height:360px;background:var(--p4);top:-90px;left:-90px;animation-duration:10s}
+.o2{width:260px;height:260px;background:var(--b4);bottom:-60px;right:-60px;animation-duration:12s;animation-delay:-4s}
+.o3{width:170px;height:170px;background:var(--p3);top:44%;right:2%;animation-duration:8s;animation-delay:-6s}
+@keyframes orbf{from{transform:translate(0,0) scale(1)}to{transform:translate(18px,26px) scale(1.07)}}
+
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+
+<!-- BOOT -->
+<div id="boot">
+  <div class="bl">
+    <svg class="bicon" viewBox="0 0 52 52" fill="none">
+      <rect width="52" height="52" rx="15" fill="url(#bbg)"/>
+      <path d="M15 34 L26 17 L37 34" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="26" cy="28" r="4.5" fill="white" opacity=".9"/>
+      <defs><linearGradient id="bbg" x1="0" y1="0" x2="52" y2="52"><stop stop-color="#7C3AED"/><stop offset="1" stop-color="#60A5FA"/></linearGradient></defs>
+    </svg>
+    <span class="bname">ThunderStudy</span>
+  </div>
+  <div class="bsub">CUET 2025 · Dress Code Guide</div>
+  <div class="btrack"><div class="bfill"></div></div>
+</div>
+
+<!-- MAIN -->
+<div id="main">
+
+<header>
+  <div class="hb">
+    <img src="https://wondermayank.github.io/Fevicon.svg" alt="ThunderStudy" onerror="this.style.display='none'">
+    <span class="hn">ThunderStudy</span>
+  </div>
+  <span class="hbadge">CUET 2025</span>
+</header>
+
+<section class="hero">
+  <div class="hpill">
+    <svg width="10" height="10" viewBox="0 0 10 10"><circle cx="5" cy="5" r="5" fill="#7C3AED"/></svg>
+    Official Dress Code Guide
+  </div>
+  <h1>CUET 2025<br><span>Dress Code</span> for Girls &amp; Boys</h1>
+  <p class="hsub">Know exactly what to wear and what to avoid on exam day. Stay prepared, stay confident.</p>
+</section>
+
+<!-- RULES -->
+<div class="rules">
+  <div class="rc ok reveal" style="animation-delay:.05s">
+    <div class="rchead"><span class="rbadge"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 6.5l3 3 6-6" stroke="#15803D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Allowed — Wear These</span></div>
+    <ul class="rl">
+      <li><span class="rdot"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1 4.5l2.5 2.5L8 2" stroke="#15803D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Light-colored / pastel clothes (peach, baby blue, light pink)</li>
+      <li><span class="rdot"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1 4.5l2.5 2.5L8 2" stroke="#15803D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Half-sleeve tops, kurtas or plain shirts</li>
+      <li><span class="rdot"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1 4.5l2.5 2.5L8 2" stroke="#15803D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Simple trousers or jeans (not tight-fitting)</li>
+      <li><span class="rdot"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1 4.5l2.5 2.5L8 2" stroke="#15803D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Flat sandals or jutis (no heels)</li>
+      <li><span class="rdot"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1 4.5l2.5 2.5L8 2" stroke="#15803D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Minimal, light makeup only (girls)</li>
+      <li><span class="rdot"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1 4.5l2.5 2.5L8 2" stroke="#15803D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Simple hair — tied or open, no accessories</li>
+    </ul>
+  </div>
+  <div class="rc no reveal" style="animation-delay:.1s">
+    <div class="rchead"><span class="rbadge"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M3 3l7 7M10 3l-7 7" stroke="#B91C1C" stroke-width="2" stroke-linecap="round"/></svg>Not Allowed — Avoid These</span></div>
+    <ul class="rl">
+      <li><span class="rdot"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M2 2l5 5M7 2L2 7" stroke="#B91C1C" stroke-width="1.5" stroke-linecap="round"/></svg></span>Tight or body-hugging clothes</li>
+      <li><span class="rdot"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M2 2l5 5M7 2L2 7" stroke="#B91C1C" stroke-width="1.5" stroke-linecap="round"/></svg></span>Skirts / dresses above the knee</li>
+      <li><span class="rdot"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M2 2l5 5M7 2L2 7" stroke="#B91C1C" stroke-width="1.5" stroke-linecap="round"/></svg></span>Full-sleeve or designer outfits with large buttons/zippers</li>
+      <li><span class="rdot"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M2 2l5 5M7 2L2 7" stroke="#B91C1C" stroke-width="1.5" stroke-linecap="round"/></svg></span>All hair accessories (bands, clips, pins, metallic items)</li>
+      <li><span class="rdot"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M2 2l5 5M7 2L2 7" stroke="#B91C1C" stroke-width="1.5" stroke-linecap="round"/></svg></span>All jewelry — earrings, bangles, rings, chains, anklets</li>
+      <li><span class="rdot"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M2 2l5 5M7 2L2 7" stroke="#B91C1C" stroke-width="1.5" stroke-linecap="round"/></svg></span>Mehandi, heavy makeup, watches, metal belts, heels, caps</li>
+    </ul>
+  </div>
+</div>
+
+<!-- FIGURE SECTION -->
+<div class="fsec">
+  <div class="stitle reveal">
+    <div class="spill">Visual Guide</div>
+    <h2>What to Wear &amp; What to Avoid</h2>
+    <p>Illustrated guide for girls and boys on CUET exam day</p>
+  </div>
+
+  <div class="frow">
+
+    <!-- ═══════════════════════════════════════════
+         GIRL – ALLOWED
+    ════════════════════════════════════════════ -->
+    <div class="fc ok reveal" style="animation-delay:.05s">
+      <div class="fwho">Girl</div>
+      <div class="flabel">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1.5 6l3 3 6-6" stroke="#15803D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Correct
+      </div>
+      <div class="fsvg">
+<img src="http://commercesehoga.github.io/cuet/about/girl_y.png" alt="" style="width:100%;height:100%;object-fit:contain;">
+</div>
+      <div class="ftags">
+        <span class="ftag">Pastel kurta</span>
+        <span class="ftag">Half sleeves</span>
+        <span class="ftag">Loose trousers</span>
+        <span class="ftag">Flat sandals</span>
+        <span class="ftag">Simple bun</span>
+        <span class="ftag">No jewelry</span>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         GIRL – NOT ALLOWED
+    ════════════════════════════════════════════ -->
+    <div class="fc no reveal" style="animation-delay:.1s">
+      <div class="fwho">Girl</div>
+      <div class="flabel">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 2.5l7 7M9.5 2.5l-7 7" stroke="#B91C1C" stroke-width="2" stroke-linecap="round"/></svg>
+        Avoid
+      </div>
+      <div class="fsvg">
+<img src="http://commercesehoga.github.io/cuet/about/girl_n.png" alt="" style="width:100%;height:100%;object-fit:contain;">
+</div>
+      <div class="ftags">
+        <span class="ftag">Tight dress ✗</span>
+        <span class="ftag">Full sleeves ✗</span>
+        <span class="ftag">Heels ✗</span>
+        <span class="ftag">Earrings ✗</span>
+        <span class="ftag">Bangles ✗</span>
+        <span class="ftag">Necklace ✗</span>
+        <span class="ftag">Hair band ✗</span>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         BOY – ALLOWED
+    ════════════════════════════════════════════ -->
+    <div class="fc ok reveal" style="animation-delay:.15s">
+      <div class="fwho">Boy</div>
+      <div class="flabel">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1.5 6l3 3 6-6" stroke="#15803D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Correct
+      </div>
+      <div class="fsvg">
+<img src="http://commercesehoga.github.io/cuet/about/boy_y.png" alt="" style="width:100%;height:100%;object-fit:contain;">
+</div>
+      <div class="ftags">
+        <span class="ftag">Light shirt</span>
+        <span class="ftag">Half sleeves</span>
+        <span class="ftag">Plain trousers</span>
+        <span class="ftag">Flat shoes</span>
+        <span class="ftag">Neat hair</span>
+        <span class="ftag">No watch</span>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         BOY – NOT ALLOWED
+    ════════════════════════════════════════════ -->
+    <div class="fc no reveal" style="animation-delay:.2s">
+      <div class="fwho">Boy</div>
+      <div class="flabel">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 2.5l7 7M9.5 2.5l-7 7" stroke="#B91C1C" stroke-width="2" stroke-linecap="round"/></svg>
+        Avoid
+      </div>
+      <div class="fsvg">
+<img src="http://commercesehoga.github.io/cuet/about/boy_n.png" alt="" style="width:100%;height:100%;object-fit:contain;">
+</div>
+      <div class="ftags">
+        <span class="ftag">Cap/hat ✗</span>
+        <span class="ftag">Full sleeves ✗</span>
+        <span class="ftag">Designer jacket ✗</span>
+        <span class="ftag">Watch ✗</span>
+        <span class="ftag">Chain ✗</span>
+        <span class="ftag">Metal belt ✗</span>
+        <span class="ftag">Tight jeans ✗</span>
+      </div>
+    </div>
+
+  </div><!-- /frow -->
+</div><!-- /fsec -->
+
+<!-- CTA -->
+<section class="cta reveal">
+  <div class="ctabox">
+    <svg width="54" height="54" viewBox="0 0 54 54" fill="none">
+      <rect width="54" height="54" rx="16" fill="url(#ctag)"/>
+      <rect x="13" y="21" width="28" height="22" rx="5" fill="white" opacity=".9"/>
+      <path d="M20 21 Q20 13 27 13 Q34 13 34 21" stroke="white" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+      <line x1="13" y1="29" x2="41" y2="29" stroke="#7C3AED" stroke-width="1.5"/>
+      <circle cx="27" cy="33" r="3" fill="#7C3AED"/>
+      <defs><linearGradient id="ctag" x1="0" y1="0" x2="54" y2="54"><stop stop-color="#7C3AED"/><stop offset="1" stop-color="#60A5FA"/></linearGradient></defs>
+    </svg>
+    <h3>What to Carry to the Exam?</h3>
+    <p>Official list of items to bring on CUET exam day.</p>
+    <a class="ctabtn" href="https://commercesehoga.github.io/about/rule" target="_blank" rel="noopener">
+      <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2 7.5h11M9 3.5l4 4-4 4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      View Carry List
+    </a>
+  </div>
+</section>
+
+<footer>
+  Made with care by <a href="https://wondermayank.github.io" target="_blank">Wondermayank</a> &nbsp;·&nbsp;
+  Powered by <a href="https://thunderstudy.in" target="_blank">ThunderStudy</a> &nbsp;·&nbsp; CUET 2025
+</footer>
+
+</div><!-- /main -->
+
+<script>
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('boot').classList.add('hide');
+    setTimeout(() => {
+      document.getElementById('boot').style.display = 'none';
+      document.getElementById('main').classList.add('show');
+    }, 680);
+  }, 2600);
+});
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }});
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
