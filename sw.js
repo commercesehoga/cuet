@@ -2,7 +2,7 @@
    THUNDERSTUDY SERVICE WORKER
    Version: bump CACHE_NAME on every deploy
 ══════════════════════════════════════════ */
-const CACHE_NAME    = 'thunderstudy-v15'; // ← bump this on every update
+const CACHE_NAME    = 'thunderstudy-v16'; // ← bump this on every update
 const OFFLINE_URL   = './offline.html';
 const MAX_CACHE_ITEMS = 60;
 
