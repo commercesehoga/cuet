@@ -2,7 +2,7 @@
    THUNDERSTUDY SERVICE WORKER
    Version: bump CACHE_NAME on every deploy
 ══════════════════════════════════════════ */
-const CACHE_NAME    = 'thunderstudy-v20'; // ← bump this on every update
+const CACHE_NAME    = 'thunderstudy-v21'; // ← bump this on every update
 const OFFLINE_URL   = './offline.html';
 const MAX_CACHE_ITEMS = 60;
 
@@ -33,9 +33,12 @@ function isPassThrough(url) {
 /* ── URLs that use network-first (fresh data preferred, cache as fallback) ── */
 function isNetworkFirst(url) {
   return (
-    url.includes('script.google.com')                     ||
-    url.includes('commercesehoga.github.io/cuet/pro.html')||
-    url.includes('commercesehoga.github.io/cuet/guide')
+    url.includes('script.google.com')                      ||
+    url.includes('commercesehoga.github.io/cuet/pro.html') ||
+    url.includes('commercesehoga.github.io/cuet/guide')    ||
+    url.endsWith('index.html')                             ||
+    url.endsWith('commercesehoga.github.io/cuet/')         ||
+    url.endsWith('commercesehoga.github.io/cuet')
   );
 }
 
