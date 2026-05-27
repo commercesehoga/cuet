@@ -13881,11 +13881,16 @@ ${window._pendingUpdateVersion ? `<div style="display:inline-block;background:rg
 function applyUpdate() {
   navigator.serviceWorker.getRegistration().then(function(reg) {
     if (reg && reg.waiting) {
+      // Wait for the new SW to actually take control, THEN reload
+      navigator.serviceWorker.addEventListener('controllerchange', function() {
+        window.location.reload();
+      });
       reg.waiting.postMessage({ type: 'SKIP_WAITING' });
+    } else {
+      window.location.reload(); // fallback if no waiting SW
     }
-    window.location.reload();
   });
-}
+    }
     /* ── Clear SW cache from app (e.g. Settings button) ── */
 function clearSWCache() {
   if (!('serviceWorker' in navigator)) return;
