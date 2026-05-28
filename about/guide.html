@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CUET 2026 – Exam Day Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Hind:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:#0D1B3E;
+  --blue:#1A3A8F;
+  --sky:#2563EB;
+  --accent:#F59E0B;
+  --gold:#FBBF24;
+  --ok:#16A34A;
+  --okl:#DCFCE7;
+  --no:#DC2626;
+  --nol:#FEE2E2;
+  --bg:#F0F4FF;
+  --card:#FFFFFF;
+  --text:#1E293B;
+  --muted:#64748B;
+  --border:#E2E8F0;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Hind',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+
+/* ===== HERO ===== */
+.hero{
+  background:linear-gradient(135deg,var(--navy) 0%,var(--blue) 60%,#1e4fc0 100%);
+  padding:48px 20px 60px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(245,158,11,.18);border:1px solid rgba(245,158,11,.4);
+  color:var(--gold);font-size:.78rem;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;padding:6px 18px;border-radius:99px;margin-bottom:18px;
+  animation:fadeUp .5s ease both;
+}
+.hero h1{
+  font-family:'Baloo 2',sans-serif;font-size:clamp(2rem,6vw,3.4rem);font-weight:800;
+  color:#fff;line-height:1.15;margin-bottom:12px;
+  animation:fadeUp .5s .1s ease both;
+}
+.hero h1 span{color:var(--gold)}
+.hero-sub{
+  color:rgba(255,255,255,.75);font-size:1.05rem;max-width:480px;margin:0 auto 28px;
+  animation:fadeUp .5s .2s ease both;
+}
+.hero-chips{
+  display:flex;flex-wrap:wrap;gap:10px;justify-content:center;
+  animation:fadeUp .5s .3s ease both;
+}
+.chip{
+  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);
+  color:#fff;font-size:.82rem;font-weight:600;padding:6px 16px;border-radius:99px;
+  backdrop-filter:blur(8px);
+}
+
+/* ===== LAYOUT ===== */
+.page{max-width:900px;margin:0 auto;padding:0 16px 60px}
+
+/* ===== SECTION HEADING ===== */
+.sec-head{
+  display:flex;align-items:center;gap:12px;
+  margin:40px 0 20px;
+}
+.sec-icon{
+  width:44px;height:44px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;
+}
+.sec-icon.blue{background:linear-gradient(135deg,var(--blue),var(--sky))}
+.sec-icon.ok{background:linear-gradient(135deg,#15803d,#22c55e)}
+.sec-icon.no{background:linear-gradient(135deg,#b91c1c,var(--no))}
+.sec-icon.amber{background:linear-gradient(135deg,#b45309,var(--accent))}
+.sec-title{font-family:'Baloo 2',sans-serif;font-size:1.4rem;font-weight:800;color:var(--navy)}
+.sec-title small{display:block;font-family:'Hind',sans-serif;font-size:.82rem;font-weight:500;color:var(--muted)}
+
+/* ===== TIMELINE (exam steps) ===== */
+.timeline{display:flex;flex-direction:column;gap:0}
+.tl-item{display:flex;gap:0;animation:fadeUp .5s ease both}
+.tl-left{display:flex;flex-direction:column;align-items:center;width:44px;flex-shrink:0}
+.tl-dot{
+  width:36px;height:36px;border-radius:50%;
+  background:linear-gradient(135deg,var(--blue),var(--sky));
+  color:#fff;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:.9rem;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  box-shadow:0 4px 12px rgba(37,99,235,.3);
+}
+.tl-line{width:2px;background:linear-gradient(to bottom,var(--sky),transparent);flex:1;min-height:20px}
+.tl-content{
+  background:var(--card);border:1px solid var(--border);border-radius:18px;
+  padding:16px 20px;margin-left:14px;margin-bottom:14px;flex:1;
+  box-shadow:0 2px 12px rgba(0,0,0,.05);
+  transition:transform .2s,box-shadow .2s;
+}
+.tl-content:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(37,99,235,.1)}
+.tl-time{
+  font-size:.72rem;font-weight:700;color:var(--sky);
+  text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;
+}
+.tl-h{font-family:'Baloo 2',sans-serif;font-weight:700;font-size:1rem;color:var(--navy);margin-bottom:4px}
+.tl-p{font-size:.88rem;color:var(--muted);line-height:1.55}
+.tl-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+.tl-tag{
+  font-size:.72rem;font-weight:600;padding:3px 10px;border-radius:99px;
+  background:var(--bg);color:var(--sky);border:1px solid rgba(37,99,235,.15);
+}
+
+/* ===== DO / DON'T GRID ===== */
+.dd-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:560px){.dd-grid{grid-template-columns:1fr}}
+
+.dd-card{border-radius:20px;padding:20px;border:1.5px solid}
+.dd-card.ok{background:var(--okl);border-color:rgba(22,163,74,.25)}
+.dd-card.no{background:var(--nol);border-color:rgba(220,38,38,.2)}
+.dd-label{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:'Baloo 2',sans-serif;font-weight:800;font-size:.85rem;
+  padding:4px 14px;border-radius:99px;margin-bottom:14px;
+}
+.ok .dd-label{background:#bbf7d0;color:#15803d}
+.no .dd-label{background:#fecaca;color:#b91c1c}
+.dd-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.dd-list li{display:flex;align-items:flex-start;gap:8px;font-size:.88rem;color:var(--text);line-height:1.45}
+.dd-dot{width:20px;height:20px;border-radius:50%;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:.7rem}
+.ok .dd-dot{background:#16a34a;color:#fff}
+.no .dd-dot{background:#dc2626;color:#fff}
+
+/* ===== CARRY LIST ===== */
+.carry-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.carry-card{
+  background:var(--card);border:1px solid var(--border);border-radius:16px;
+  padding:16px;display:flex;align-items:center;gap:12px;
+  box-shadow:0 2px 8px rgba(0,0,0,.04);
+  transition:transform .2s;
+}
+.carry-card:hover{transform:translateY(-2px)}
+.carry-icon{font-size:1.6rem;flex-shrink:0}
+.carry-text strong{display:block;font-family:'Baloo 2',sans-serif;font-weight:700;font-size:.92rem;color:var(--navy)}
+.carry-text span{font-size:.78rem;color:var(--muted)}
+
+/* ===== BARRED ITEMS ===== */
+.barred-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+.barred-item{
+  background:var(--nol);border:1.5px solid rgba(220,38,38,.2);border-radius:14px;
+  padding:12px;display:flex;align-items:center;gap:10px;
+}
+.barred-item span{font-size:1.3rem;flex-shrink:0}
+.barred-item p{font-size:.82rem;font-weight:600;color:#b91c1c;line-height:1.3}
+
+/* ===== DRESS CODE QUICK TIPS ===== */
+.dress-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:560px){.dress-grid{grid-template-columns:1fr}}
+.dress-card{
+  border-radius:18px;padding:18px;border:1.5px solid;
+}
+.dress-card.ok{background:var(--okl);border-color:rgba(22,163,74,.2)}
+.dress-card.no{background:var(--nol);border-color:rgba(220,38,38,.18)}
+.dress-h{font-family:'Baloo 2',sans-serif;font-weight:800;font-size:.95rem;margin-bottom:10px;display:flex;align-items:center;gap:7px}
+.ok .dress-h{color:#15803d}
+.no .dress-h{color:#b91c1c}
+
+/* ===== MARKING SCHEME ===== */
+.marks-row{display:flex;flex-wrap:wrap;gap:12px}
+.marks-card{
+  flex:1;min-width:140px;background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:18px;text-align:center;
+  box-shadow:0 2px 10px rgba(0,0,0,.04);
+}
+.marks-num{font-family:'Baloo 2',sans-serif;font-size:2rem;font-weight:800}
+.marks-num.green{color:var(--ok)}
+.marks-num.red{color:var(--no)}
+.marks-num.gray{color:var(--muted)}
+.marks-label{font-size:.82rem;color:var(--muted);margin-top:4px}
+
+/* ===== ALERT BOX ===== */
+.alert{
+  border-radius:16px;padding:16px 20px;margin-bottom:14px;
+  display:flex;align-items:flex-start;gap:12px;border-left:4px solid;
+}
+.alert.warn{background:#fffbeb;border-color:var(--accent)}
+.alert.info{background:#eff6ff;border-color:var(--sky)}
+.alert.danger{background:var(--nol);border-color:var(--no)}
+.alert-icon{font-size:1.4rem;flex-shrink:0;margin-top:-2px}
+.alert-body strong{display:block;font-family:'Baloo 2',sans-serif;font-weight:700;font-size:.95rem;margin-bottom:3px}
+.alert-body p{font-size:.86rem;color:var(--muted);line-height:1.5}
+
+/* ===== CTA BUTTONS ===== */
+.cta-section{
+  background:linear-gradient(135deg,var(--navy),var(--blue));
+  border-radius:28px;padding:36px 28px;text-align:center;margin-top:44px;
+  position:relative;overflow:hidden;
+}
+.cta-section::before{
+  content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M20 20.5V18H0v5h5v5H0v5h20v-5h15v-5H20v-.5zm-1 0V18H1v5h5v5H1v5h18v-5h14v-5H19v-.5z'/%3E%3C/g%3E%3C/svg%3E");
+}
+.cta-section h2{font-family:'Baloo 2',sans-serif;font-size:1.6rem;font-weight:800;color:#fff;margin-bottom:8px;position:relative}
+.cta-section p{color:rgba(255,255,255,.75);font-size:.92rem;margin-bottom:28px;position:relative}
+.btn-row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;position:relative}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'Baloo 2',sans-serif;font-weight:700;font-size:.92rem;
+  padding:14px 24px;border-radius:14px;text-decoration:none;
+  transition:transform .2s,box-shadow .2s;cursor:pointer;
+}
+.btn:hover{transform:translateY(-3px)}
+.btn-primary{background:var(--gold);color:var(--navy);box-shadow:0 6px 20px rgba(251,191,36,.35)}
+.btn-primary:hover{box-shadow:0 10px 28px rgba(251,191,36,.5)}
+.btn-outline{background:rgba(255,255,255,.12);color:#fff;border:1.5px solid rgba(255,255,255,.25)}
+.btn-outline:hover{background:rgba(255,255,255,.2)}
+
+/* ===== INFO STRIP ===== */
+.info-strip{
+  background:var(--card);border:1px solid var(--border);border-radius:16px;
+  padding:16px 20px;display:flex;align-items:center;gap:14px;
+  margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,.04);
+}
+.info-strip .dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.info-strip .dot.blue{background:var(--sky)}
+.info-strip .dot.ok{background:var(--ok)}
+.info-strip .dot.amber{background:var(--accent)}
+.info-strip strong{font-family:'Baloo 2',sans-serif;font-weight:700;font-size:.95rem;color:var(--navy)}
+.info-strip span{font-size:.85rem;color:var(--muted);margin-left:auto}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease}
+.reveal.show{opacity:1;transform:none}
+
+/* ===== FOOTER ===== */
+footer{
+  text-align:center;padding:24px;font-size:.82rem;color:var(--muted);
+  border-top:1px solid var(--border);margin-top:40px;
+}
+footer a{color:var(--sky);text-decoration:none;font-weight:600}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">📋 CUET UG 2026</div>
+  <h1>Exam Day <span>Complete Guide</span></h1>
+  <p class="hero-sub">Everything you need to know — what to do, what to avoid, how to give the exam, and the dress code.</p>
+  <div class="hero-chips">
+    <span class="chip">📅 11–31 May 2026</span>
+    <span class="chip">🖥️ Computer Based Test</span>
+    <span class="chip">⏱️ 60 Min per Paper</span>
+    <span class="chip">📝 50 Questions</span>
+    <span class="chip">+5 / -1 Marking</span>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- MARKING SCHEME -->
+  <div class="sec-head reveal">
+    <div class="sec-icon blue">🎯</div>
+    <div class="sec-title">Marking Scheme <small>How marks are calculated</small></div>
+  </div>
+  <div class="marks-row reveal">
+    <div class="marks-card">
+      <div class="marks-num green">+5</div>
+      <div class="marks-label">✅ Correct Answer</div>
+    </div>
+    <div class="marks-card">
+      <div class="marks-num red">−1</div>
+      <div class="marks-label">❌ Wrong Answer</div>
+    </div>
+    <div class="marks-card">
+      <div class="marks-num gray">0</div>
+      <div class="marks-label">⬜ Unattempted</div>
+    </div>
+    <div class="marks-card">
+      <div class="marks-num" style="color:var(--sky);font-size:1.4rem">50 Qs</div>
+      <div class="marks-label">All compulsory</div>
+    </div>
+  </div>
+
+  <div class="alert warn reveal" style="margin-top:16px">
+    <span class="alert-icon">⚠️</span>
+    <div class="alert-body">
+      <strong>Think before you click!</strong>
+      <p>A wrong answer costs you 1 mark. Skip a question if you're not sure — unattempted questions get 0, not −1.</p>
+    </div>
+  </div>
+
+  <!-- EXAM DAY TIMELINE -->
+  <div class="sec-head reveal">
+    <div class="sec-icon amber">⏰</div>
+    <div class="sec-title">Exam Day – Step by Step <small>What to do from morning to finish</small></div>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-item reveal" style="animation-delay:.05s">
+      <div class="tl-left"><div class="tl-dot">1</div><div class="tl-line"></div></div>
+      <div class="tl-content">
+        <div class="tl-time">Night Before</div>
+        <div class="tl-h">Prepare everything in advance</div>
+        <p class="tl-p">Keep your admit card, photo ID, passport photo, and ball-point pen ready. Check your exam center location and plan your route.</p>
+        <div class="tl-tags"><span class="tl-tag">Admit Card</span><span class="tl-tag">Photo ID</span><span class="tl-tag">Passport Photo</span></div>
+      </div>
+    </div>
+
+    <div class="tl-item reveal" style="animation-delay:.1s">
+      <div class="tl-left"><div class="tl-dot">2</div><div class="tl-line"></div></div>
+      <div class="tl-content">
+        <div class="tl-time">2 Hours Before Exam</div>
+        <div class="tl-h">Reach the exam center early</div>
+        <p class="tl-p">Report at least 2 hours before the exam. Candidates wearing religious/customary dress must report 2 hours before last reporting time for proper frisking.</p>
+        <div class="tl-tags"><span class="tl-tag">Frisking with metal detector</span><span class="tl-tag">Document check</span></div>
+      </div>
+    </div>
+
+    <div class="tl-item reveal" style="animation-delay:.15s">
+      <div class="tl-left"><div class="tl-dot">3</div><div class="tl-line"></div></div>
+      <div class="tl-content">
+        <div class="tl-time">At Entry</div>
+        <div class="tl-h">Show your documents & get seated</div>
+        <p class="tl-p">Show admit card + photo ID at entry. Find your allotted seat using your Roll Number. Do NOT sit in any other seat — this may cancel your candidature.</p>
+        <div class="tl-tags"><span class="tl-tag">Sit in assigned seat only</span><span class="tl-tag">Paste photo on attendance sheet</span></div>
+      </div>
+    </div>
+
+    <div class="tl-item reveal" style="animation-delay:.2s">
+      <div class="tl-left"><div class="tl-dot">4</div><div class="tl-line"></div></div>
+      <div class="tl-content">
+        <div class="tl-time">Before Exam Starts</div>
+        <div class="tl-h">Login & verify your question paper</div>
+        <p class="tl-p">Login with your credentials. Verify the subject on screen matches your admit card. Read all instructions carefully on screen. If subject is wrong, immediately tell the invigilator.</p>
+        <div class="tl-tags"><span class="tl-tag">Check subject on screen</span><span class="tl-tag">Read CBT instructions</span></div>
+      </div>
+    </div>
+
+    <div class="tl-item reveal" style="animation-delay:.25s">
+      <div class="tl-left"><div class="tl-dot">5</div><div class="tl-line"></div></div>
+      <div class="tl-content">
+        <div class="tl-time">During Exam (60 Minutes)</div>
+        <div class="tl-h">Answer wisely — use "Mark for Review"</div>
+        <p class="tl-p">Use Save & Next to save answers. Use Mark for Review if you want to revisit a question later. You can switch between questions anytime. The timer is on the top-right corner of your screen. Exam ends automatically when timer hits zero.</p>
+        <div class="tl-tags"><span class="tl-tag">Save & Next for each answer</span><span class="tl-tag">Can change answers anytime</span><span class="tl-tag">Rough sheet provided</span></div>
+      </div>
+    </div>
+
+    <div class="tl-item reveal" style="animation-delay:.3s">
+      <div class="tl-left"><div class="tl-dot">6</div><div class="tl-line"></div></div>
+      <div class="tl-content">
+        <div class="tl-time">After Exam Ends</div>
+        <div class="tl-h">Submit rough sheet to invigilator</div>
+        <p class="tl-p">Hand over your rough sheet to the invigilator before leaving. Write your name and application number on top of the rough sheet. Do NOT take it outside the hall.</p>
+        <div class="tl-tags"><span class="tl-tag">Return rough sheet</span><span class="tl-tag">Do not swap rough sheets</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DO & DON'T -->
+  <div class="sec-head reveal">
+    <div class="sec-icon ok">✅</div>
+    <div class="sec-title">Do's & Don'ts <small>Key rules for the exam</small></div>
+  </div>
+
+  <div class="dd-grid reveal">
+    <div class="dd-card ok">
+      <div class="dd-label">✅ DO These</div>
+      <ul class="dd-list">
+        <li><div class="dd-dot">✓</div><span>Carry a printed admit card (A4 size) with self-declaration filled</span></li>
+        <li><div class="dd-dot">✓</div><span>Carry original valid Photo ID (Aadhaar / PAN / Passport etc.)</span></li>
+        <li><div class="dd-dot">✓</div><span>Carry 1 passport-size photo (same as uploaded) to paste on attendance sheet</span></li>
+        <li><div class="dd-dot">✓</div><span>Use only a simple transparent ball-point pen</span></li>
+        <li><div class="dd-dot">✓</div><span>Sit in your allotted seat with your Roll Number</span></li>
+        <li><div class="dd-dot">✓</div><span>Save your answer using "Save & Next" after each question</span></li>
+        <li><div class="dd-dot">✓</div><span>Report technical issues to the invigilator immediately</span></li>
+        <li><div class="dd-dot">✓</div><span>Diabetic candidates can carry sugar tablets / banana / apple / orange</span></li>
+      </ul>
+    </div>
+    <div class="dd-card no">
+      <div class="dd-label">❌ DON'T Do These</div>
+      <ul class="dd-list">
+        <li><div class="dd-dot">✗</div><span>Do NOT carry mobile phone, earphones, Bluetooth, smartwatch</span></li>
+        <li><div class="dd-dot">✗</div><span>Do NOT carry calculator, pen drive, or any electronic device</span></li>
+        <li><div class="dd-dot">✗</div><span>Do NOT carry wallet, handbag, belt, cap, or goggles</span></li>
+        <li><div class="dd-dot">✗</div><span>Do NOT wear full-sleeve heavy clothes or shoes</span></li>
+        <li><div class="dd-dot">✗</div><span>Do NOT wear any watch, bracelet, or metallic jewellery</span></li>
+        <li><div class="dd-dot">✗</div><span>Do NOT change your seat on your own</span></li>
+        <li><div class="dd-dot">✗</div><span>Do NOT communicate with other candidates during exam</span></li>
+        <li><div class="dd-dot">✗</div><span>Do NOT take rough sheet outside the exam hall</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- BARRED ITEMS -->
+  <div class="sec-head reveal">
+    <div class="sec-icon no">🚫</div>
+    <div class="sec-title">Strictly Barred Items <small>Not allowed inside exam center</small></div>
+  </div>
+
+  <div class="barred-grid reveal">
+    <div class="barred-item"><span>📱</span><p>Mobile Phone / Pager</p></div>
+    <div class="barred-item"><span>🎧</span><p>Earphones / Bluetooth</p></div>
+    <div class="barred-item"><span>⌚</span><p>Watch / Smartwatch</p></div>
+    <div class="barred-item"><span>🧮</span><p>Calculator</p></div>
+    <div class="barred-item"><span>💼</span><p>Handbag / Wallet</p></div>
+    <div class="barred-item"><span>🕶️</span><p>Goggles</p></div>
+    <div class="barred-item"><span>📏</span><p>Pen / Scale / Eraser</p></div>
+    <div class="barred-item"><span>💾</span><p>Pen Drive / DocuPen</p></div>
+    <div class="barred-item"><span>📷</span><p>Camera / Tape Recorder</p></div>
+    <div class="barred-item"><span>🔗</span><p>Ornaments / Metallic Items</p></div>
+    <div class="barred-item"><span>🥤</span><p>Food / Water Bottles</p></div>
+    <div class="barred-item"><span>🎽</span><p>Belt / Cap / Hat</p></div>
+  </div>
+
+  <!-- DRESS CODE -->
+  <div class="sec-head reveal">
+    <div class="sec-icon blue">👗</div>
+    <div class="sec-title">Dress Code <small>Official CUET dress rules</small></div>
+  </div>
+
+  <div class="dress-grid reveal">
+    <div class="dress-card ok">
+      <div class="dress-h">✅ Wear This</div>
+      <ul class="dd-list">
+        <li><div class="dd-dot">✓</div><span>Light-colored / pastel clothes (peach, baby blue, light pink)</span></li>
+        <li><div class="dd-dot">✓</div><span>Half-sleeve tops, kurtas, or plain shirts</span></li>
+        <li><div class="dd-dot">✓</div><span>Loose-fitting trousers or regular-fit jeans</span></li>
+        <li><div class="dd-dot">✓</div><span>Slippers or sandals with low heels</span></li>
+        <li><div class="dd-dot">✓</div><span>Simple hair (tied or open) — no accessories</span></li>
+        <li><div class="dd-dot">✓</div><span>Minimal light makeup (girls only)</span></li>
+      </ul>
+    </div>
+    <div class="dress-card no">
+      <div class="dress-h">❌ Avoid This</div>
+      <ul class="dd-list">
+        <li><div class="dd-dot">✗</div><span>Heavy clothes or full sleeves with big buttons/zippers</span></li>
+        <li><div class="dd-dot">✗</div><span>Shoes (all candidates)</span></li>
+        <li><div class="dd-dot">✗</div><span>High heels (girls)</span></li>
+        <li><div class="dd-dot">✗</div><span>Hair accessories — bands, clips, pins, metallic items</span></li>
+        <li><div class="dd-dot">✗</div><span>All jewelry — earrings, bangles, rings, chains, anklets</span></li>
+        <li><div class="dd-dot">✗</div><span>Cap, hat, or any headgear (boys)</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="alert info reveal" style="margin-top:16px">
+    <span class="alert-icon">ℹ️</span>
+    <div class="alert-body">
+      <strong>Customary / Religious Dress?</strong>
+      <p>If you come in cultural or religious attire, report at least 2 hours before the last reporting time for proper frisking by the exam staff.</p>
+    </div>
+  </div>
+
+  <!-- CBT TIPS -->
+  <div class="sec-head reveal">
+    <div class="sec-icon blue">🖥️</div>
+    <div class="sec-title">How to Use the CBT Interface <small>Computer Based Test tips</small></div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:10px" class="reveal">
+    <div class="info-strip">
+      <div class="dot blue"></div>
+      <div>
+        <strong>Question Palette (Right Side)</strong>
+        <p style="font-size:.82rem;color:var(--muted);margin-top:2px">Shows status of all questions — Visited, Not Answered, Answered, Marked for Review</p>
+      </div>
+    </div>
+    <div class="info-strip">
+      <div class="dot ok"></div>
+      <div>
+        <strong>Save & Next</strong>
+        <p style="font-size:.82rem;color:var(--muted);margin-top:2px">Always click "Save & Next" after answering a question to save your response</p>
+      </div>
+    </div>
+    <div class="info-strip">
+      <div class="dot blue"></div>
+      <div>
+        <strong>Mark for Review</strong>
+        <p style="font-size:.82rem;color:var(--muted);margin-top:2px">Mark a question to revisit later. Answered + Marked questions ARE counted for evaluation</p>
+      </div>
+    </div>
+    <div class="info-strip">
+      <div class="dot amber"></div>
+      <div>
+        <strong>Clear Response</strong>
+        <p style="font-size:.82rem;color:var(--muted);margin-top:2px">To change an answer, click "Clear Response" and then select a new option</p>
+      </div>
+    </div>
+    <div class="info-strip">
+      <div class="dot ok"></div>
+      <div>
+        <strong>Auto Submit</strong>
+        <p style="font-size:.82rem;color:var(--muted);margin-top:2px">Exam ends automatically when the timer reaches zero. No need to submit manually</p>
+      </div>
+    </div>
+    <div class="info-strip">
+      <div class="dot blue"></div>
+      <div>
+        <strong>Computer Malfunction?</strong>
+        <p style="font-size:.82rem;color:var(--muted);margin-top:2px">Inform invigilator immediately. A new system will be provided and lost time adjusted</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- IMPORTANT ALERTS -->
+  <div class="sec-head reveal">
+    <div class="sec-icon amber">🔔</div>
+    <div class="sec-title">Important Reminders <small>Don't miss these</small></div>
+  </div>
+
+  <div class="reveal">
+    <div class="alert danger">
+      <span class="alert-icon">🚨</span>
+      <div class="alert-body">
+        <strong>Late Entry = No Entry</strong>
+        <p>Any candidate reporting after the gate closing time will NOT be allowed inside. Do not be late!</p>
+      </div>
+    </div>
+    <div class="alert danger">
+      <span class="alert-icon">🚨</span>
+      <div class="alert-body">
+        <strong>Multiple Application Forms = Cancellation</strong>
+        <p>Submitting more than one application form will cancel your result. Apply only once.</p>
+      </div>
+    </div>
+    <div class="alert warn">
+      <span class="alert-icon">⚠️</span>
+      <div class="alert-body">
+        <strong>Appear Only at Your Allotted Center</strong>
+        <p>Appearing from any other center — or allowing someone else to write for you — will lead to result cancellation and possible debarment up to 3 years.</p>
+      </div>
+    </div>
+    <div class="alert info">
+      <span class="alert-icon">💡</span>
+      <div class="alert-body">
+        <strong>CUET Score is valid only for 2026–27</strong>
+        <p>Your NTA Score is valid for admission to Central Universities and other participating universities for academic year 2026-27 only.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA BUTTONS -->
+  <div class="cta-section reveal">
+    <h2>Ready for Your Exam?</h2>
+    <p>Check the official carry list, practice the CBT interface, and review the complete dress code before your exam day.</p>
+    <div class="btn-row">
+      <a href="https://commercesehoga.github.io/cuet/about/rule" target="_blank" class="btn btn-primary">
+        🎒 What to Carry
+      </a>
+      <a href="https://commercesehoga.github.io/cuet" target="_blank" class="btn btn-outline">
+        🖥️ Try CBT Mock Test
+      </a>
+      <a href="https://commercesehoga.github.io/cuet/about/dress" target="_blank" class="btn btn-outline">
+        👗 Dress Code Guide
+      </a>
+    </div>
+  </div>
+
+</div><!-- /page -->
+
+<footer>
+  Based on official <a href="https://cuet.nta.nic.in" target="_blank">CUET (UG) 2026 Information Bulletin</a> by NTA &nbsp;·&nbsp; Helpline: <strong>011-40759000</strong> &nbsp;·&nbsp; cuet-ug@nta.ac.in
+</footer>
+
+<script>
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); }
+  });
+}, {threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>

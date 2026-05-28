@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CUET 2026 – What to Carry | ThunderStudy</title>
+<meta name="description" content="Official CUET 2026 exam day carry guide – what to bring and what is strictly banned at the exam centre. Know before you go!">
+<link rel="icon" type="image/svg+xml" href="https://wondermayank.github.io/Fevicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --p6:#7C3AED;--p5:#8B5CF6;--p4:#A78BFA;--p3:#C4B5FD;--p2:#DDD6FE;--p1:#EDE9FE;--p0:#F5F3FF;
+  --b4:#60A5FA;--b3:#93C5FD;--b2:#BFDBFE;--b1:#DBEAFE;
+  --g9:#111827;--g7:#374151;--g5:#6B7280;--g3:#D1D5DB;--g1:#F3F4F6;
+  --ok:#22C55E;--okl:#DCFCE7;--okd:#15803D;
+  --no:#EF4444;--nol:#FEE2E2;--nod:#B91C1C;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:#F7F5FF;color:var(--g9);overflow-x:hidden}
+
+/* ── BOOT ── */
+#boot{
+  position:fixed;inset:0;z-index:9999;
+  background:linear-gradient(140deg,#EDE9FE,#EFF6FF 55%,#F5F3FF);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;
+  transition:opacity .65s ease,transform .65s ease;
+}
+#boot.hide{opacity:0;transform:scale(1.05);pointer-events:none}
+.bl{display:flex;align-items:center;gap:12px;animation:bup .7s ease both}
+.bicon{width:52px;height:52px}
+.bname{font-family:'Syne',sans-serif;font-weight:800;font-size:2rem;background:linear-gradient(135deg,var(--p6),var(--b4));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.bsub{font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--g5);animation:bup .7s .15s ease both}
+.btrack{width:190px;height:4px;border-radius:99px;background:var(--p2);overflow:hidden;animation:bup .7s .28s ease both}
+.bfill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--p6),var(--b4));width:0;animation:bfill 2.1s .35s cubic-bezier(.4,0,.2,1) forwards}
+@keyframes bfill{to{width:100%}}
+@keyframes bup{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+/* ── MAIN ── */
+#main{opacity:0;transition:opacity .5s ease}
+#main.show{opacity:1}
+
+/* ── ORBS ── */
+.orb{position:fixed;border-radius:50%;pointer-events:none;opacity:.1;z-index:0;animation:orbf 9s ease-in-out infinite alternate}
+.o1{width:360px;height:360px;background:var(--p4);top:-90px;left:-90px;animation-duration:10s}
+.o2{width:260px;height:260px;background:var(--b4);bottom:-60px;right:-60px;animation-duration:12s;animation-delay:-4s}
+.o3{width:170px;height:170px;background:var(--p3);top:44%;right:2%;animation-duration:8s;animation-delay:-6s}
+@keyframes orbf{from{transform:translate(0,0) scale(1)}to{transform:translate(18px,26px) scale(1.07)}}
+
+/* ── HEADER ── */
+header{
+  position:sticky;top:0;z-index:100;
+  background:rgba(255,255,255,.88);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--p1);padding:16px 24px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.hb{display:flex;align-items:center;gap:10px}
+.hb img{width:30px;height:30px}
+.hn{font-family:'Syne',sans-serif;font-weight:800;font-size:1.05rem;background:linear-gradient(135deg,var(--p6),var(--b4));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hbadge{background:linear-gradient(135deg,var(--p1),var(--b1));color:var(--p6);font-size:.76rem;font-weight:700;padding:5px 14px;border-radius:99px;border:1px solid var(--p2)}
+
+/* ── HERO ── */
+.hero{text-align:center;padding:60px 20px 40px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(167,139,250,.15),transparent 70%);pointer-events:none}
+.hpill{
+  display:inline-flex;align-items:center;gap:7px;
+  background:rgba(124,58,237,.08);border:1px solid var(--p2);color:var(--p6);
+  padding:5px 15px;border-radius:99px;font-size:.76rem;font-weight:700;letter-spacing:.06em;
+  text-transform:uppercase;margin-bottom:18px;animation:fup .6s .05s ease both;
+}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,5vw,3.1rem);font-weight:900;line-height:1.18;margin-bottom:10px;animation:fup .6s .15s ease both}
+.hero h1 span{background:linear-gradient(135deg,var(--p6),var(--b4));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hsub{color:var(--g5);font-size:1rem;max-width:460px;margin:0 auto 24px;animation:fup .6s .25s ease both}
+.hchips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;animation:fup .6s .35s ease both}
+.hchip{
+  background:rgba(124,58,237,.07);border:1px solid var(--p2);color:var(--p6);
+  font-size:.76rem;font-weight:600;padding:4px 13px;border-radius:99px;
+}
+@keyframes fup{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+
+/* ── SECTION TITLE ── */
+.stitle{text-align:center;margin-bottom:28px}
+.stitle .spill{
+  display:inline-block;background:linear-gradient(135deg,var(--p1),var(--b1));
+  border:1px solid var(--p2);color:var(--p6);font-size:.72rem;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;padding:4px 14px;border-radius:99px;margin-bottom:9px;
+}
+.stitle h2{font-family:'Syne',sans-serif;font-size:1.55rem;font-weight:800;color:var(--g9);margin-bottom:5px}
+.stitle p{color:var(--g5);font-size:.9rem}
+
+/* ── CARRY GRID ── */
+.csec{max-width:960px;margin:0 auto 20px;padding:0 20px}
+
+/* ok carry cards */
+.carry-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
+.carry-card{
+  background:rgba(255,255,255,.9);backdrop-filter:blur(12px);
+  border:1.5px solid rgba(34,197,94,.22);border-radius:20px;
+  padding:18px 20px;display:flex;align-items:flex-start;gap:14px;
+  box-shadow:0 2px 16px rgba(34,197,94,.07);
+  transition:transform .2s,box-shadow .2s;
+  animation:fup .5s ease both;
+}
+.carry-card:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(34,197,94,.12)}
+.carry-emo{
+  width:46px;height:46px;border-radius:14px;
+  background:var(--okl);display:flex;align-items:center;justify-content:center;
+  font-size:1.4rem;flex-shrink:0;
+}
+.carry-body strong{display:block;font-family:'Syne',sans-serif;font-weight:700;font-size:.92rem;color:var(--g9);margin-bottom:3px}
+.carry-body p{font-size:.82rem;color:var(--g5);line-height:1.45}
+.carry-badge{
+  display:inline-block;margin-top:6px;font-size:.68rem;font-weight:700;
+  padding:2px 8px;border-radius:99px;background:var(--okl);color:var(--okd);
+  border:1px solid rgba(34,197,94,.2);
+}
+
+/* banned cards */
+.ban-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.ban-card{
+  background:rgba(255,255,255,.9);backdrop-filter:blur(12px);
+  border:1.5px solid rgba(239,68,68,.18);border-radius:18px;
+  padding:16px 18px;display:flex;align-items:center;gap:12px;
+  box-shadow:0 2px 14px rgba(239,68,68,.06);
+  transition:transform .2s,box-shadow .2s;
+  animation:fup .5s ease both;
+}
+.ban-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(239,68,68,.1)}
+.ban-emo{
+  width:40px;height:40px;border-radius:12px;
+  background:var(--nol);display:flex;align-items:center;justify-content:center;
+  font-size:1.25rem;flex-shrink:0;position:relative;
+}
+.ban-emo::after{
+  content:'✕';position:absolute;bottom:-4px;right:-4px;
+  width:16px;height:16px;border-radius:50%;background:var(--no);color:#fff;
+  font-size:.55rem;font-weight:900;display:flex;align-items:center;justify-content:center;
+  line-height:16px;text-align:center;
+}
+.ban-body strong{display:block;font-family:'Syne',sans-serif;font-weight:700;font-size:.86rem;color:var(--nod)}
+.ban-body p{font-size:.76rem;color:var(--g5);margin-top:2px;line-height:1.35}
+
+/* ── ALERT BOX ── */
+.alert-wrap{max-width:960px;margin:0 auto 8px;padding:0 20px}
+.alert{
+  border-radius:16px;padding:15px 18px;
+  display:flex;align-items:flex-start;gap:12px;
+  border-left:4px solid;margin-bottom:12px;
+}
+.alert.warn{background:#fffbeb;border-color:#F59E0B}
+.alert.info{background:var(--p1);border-color:var(--p6)}
+.alert.danger{background:var(--nol);border-color:var(--no)}
+.alert-ico{font-size:1.3rem;flex-shrink:0;margin-top:-1px}
+.alert strong{display:block;font-family:'Syne',sans-serif;font-weight:700;font-size:.9rem;color:var(--g9);margin-bottom:3px}
+.alert p{font-size:.83rem;color:var(--g5);line-height:1.5}
+
+/* ── QUICK RULES ── */
+.qr-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:960px;margin:0 auto 32px;padding:0 20px}
+@media(max-width:560px){.qr-grid{grid-template-columns:1fr}}
+.qr-card{
+  background:rgba(255,255,255,.88);backdrop-filter:blur(12px);
+  border-radius:22px;padding:22px;
+  box-shadow:0 2px 20px rgba(124,58,237,.06);animation:fup .5s ease both;
+}
+.qr-card.ok{border:1.5px solid rgba(34,197,94,.25)}
+.qr-card.no{border:1.5px solid rgba(239,68,68,.22)}
+.qr-head{display:flex;align-items:center;gap:8px;margin-bottom:14px}
+.qr-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 13px;border-radius:99px;font-size:.78rem;font-weight:700}
+.ok .qr-badge{background:var(--okl);color:var(--okd)}
+.no .qr-badge{background:var(--nol);color:var(--nod)}
+.qr-list{list-style:none;display:flex;flex-direction:column;gap:7px}
+.qr-list li{display:flex;align-items:flex-start;gap:8px;font-size:.86rem;color:var(--g7);line-height:1.45}
+.qdot{width:18px;height:18px;border-radius:50%;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:800}
+.ok .qdot{background:var(--okl);color:var(--okd)}
+.no .qdot{background:var(--nol);color:var(--nod)}
+
+/* ── CTA ── */
+.cta{text-align:center;padding:36px 20px 60px}
+.ctabox{
+  display:inline-flex;flex-direction:column;align-items:center;gap:14px;
+  background:rgba(255,255,255,.92);backdrop-filter:blur(16px);
+  border:1.5px solid var(--p2);border-radius:28px;padding:32px 42px;
+  box-shadow:0 4px 36px rgba(124,58,237,.1);
+}
+@media(max-width:480px){.ctabox{padding:24px 20px}}
+.ctabox h3{font-family:'Syne',sans-serif;font-size:1.12rem;font-weight:800;color:var(--g9)}
+.ctabox p{color:var(--g5);font-size:.86rem;max-width:300px;text-align:center}
+.cta-btns{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.ctabtn{
+  display:inline-flex;align-items:center;gap:7px;
+  background:linear-gradient(135deg,var(--p6),#8B5CF6);color:#fff;
+  text-decoration:none;font-weight:700;font-size:.86rem;
+  padding:11px 22px;border-radius:13px;
+  box-shadow:0 4px 18px rgba(124,58,237,.32);
+  transition:transform .2s,box-shadow .2s;
+}
+.ctabtn:hover{transform:translateY(-2px);box-shadow:0 8px 26px rgba(124,58,237,.4)}
+.ctabtn.out{background:transparent;border:1.5px solid var(--p3);color:var(--p6);box-shadow:none}
+.ctabtn.out:hover{background:var(--p1)}
+
+/* ── FOOTER ── */
+footer{
+  background:rgba(255,255,255,.7);border-top:1px solid var(--p1);
+  text-align:center;padding:22px 20px;font-size:.8rem;color:var(--g5);
+}
+footer a{color:var(--p6);text-decoration:none;font-weight:600}
+footer a:hover{text-decoration:underline}
+.footer-inner{display:flex;flex-direction:column;gap:6px;align-items:center}
+.footer-row{display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:center;align-items:center}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<div class="orb o1"></div>
+<div class="orb o2"></div>
+<div class="orb o3"></div>
+
+<!-- ═══ BOOT SCREEN ═══ -->
+<div id="boot">
+  <div class="bl">
+    <svg class="bicon" viewBox="0 0 52 52" fill="none">
+      <rect width="52" height="52" rx="15" fill="url(#bbg)"/>
+      <!-- briefcase icon -->
+      <rect x="12" y="20" width="28" height="20" rx="4" fill="white" opacity=".9"/>
+      <path d="M20 20v-3a2 2 0 012-2h8a2 2 0 012 2v3" stroke="white" stroke-width="2" stroke-linecap="round" fill="none"/>
+      <line x1="12" y1="29" x2="40" y2="29" stroke="url(#bbg2)" stroke-width="1.5"/>
+      <circle cx="26" cy="29" r="2.5" fill="white"/>
+      <defs>
+        <linearGradient id="bbg" x1="0" y1="0" x2="52" y2="52"><stop stop-color="#7C3AED"/><stop offset="1" stop-color="#60A5FA"/></linearGradient>
+        <linearGradient id="bbg2" x1="0" y1="0" x2="52" y2="0"><stop stop-color="#7C3AED"/><stop offset="1" stop-color="#60A5FA"/></linearGradient>
+      </defs>
+    </svg>
+    <span class="bname">ThunderStudy</span>
+  </div>
+  <div class="bsub">CUET 2026 · Carry Guide</div>
+  <div class="btrack"><div class="bfill"></div></div>
+</div>
+
+<!-- ═══ MAIN ═══ -->
+<div id="main">
+
+<header>
+  <div class="hb">
+    <img src="https://wondermayank.github.io/Fevicon.svg" alt="ThunderStudy" onerror="this.style.display='none'">
+    <span class="hn">ThunderStudy</span>
+  </div>
+  <span class="hbadge">CUET 2026</span>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hpill">
+    <svg width="10" height="10" viewBox="0 0 10 10"><circle cx="5" cy="5" r="5" fill="#7C3AED"/></svg>
+    Official Exam Day Carry Guide
+  </div>
+  <h1>What to <span>Carry</span> &<br>What <span>Not</span> to Carry</h1>
+  <p class="hsub">Know exactly what to bring to your CUET 2026 exam centre — and what is strictly banned. Stay prepared, avoid disqualification.</p>
+  <div class="hchips">
+    <span class="hchip">📅 11–31 May 2026</span>
+    <span class="hchip">🖥️ CBT Mode</span>
+    <span class="hchip">🏛️ All Centres</span>
+    <span class="hchip">⚠️ Strict Frisking</span>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════
+     ALERT — KEY WARNING
+════════════════════════════════════ -->
+<div class="alert-wrap reveal">
+  <div class="alert danger">
+    <span class="alert-ico">🚨</span>
+    <div>
+      <strong>Highly Sensitive Metal Detectors at Entry</strong>
+      <p>All candidates will be subjected to compulsory frisking with metal detectors before entering the exam centre. Any banned item found = you may be denied entry or booked under Unfair Means (UFM).</p>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════
+     SECTION — WHAT TO CARRY
+════════════════════════════════════ -->
+<div class="csec">
+  <div class="stitle reveal">
+    <div class="spill">✅ Must Carry</div>
+    <h2>Items You Must Bring</h2>
+    <p>Without these, you will NOT be allowed to sit in the exam</p>
+  </div>
+
+  <div class="carry-grid">
+
+    <div class="carry-card reveal" style="animation-delay:.04s">
+      <div class="carry-emo">🖨️</div>
+      <div class="carry-body">
+        <strong>Admit Card Printout</strong>
+        <p>A4 size clear printout with Self-Declaration (Undertaking) duly filled in. Downloaded from the NTA website.</p>
+        <span class="carry-badge">✅ Mandatory</span>
+      </div>
+    </div>
+
+    <div class="carry-card reveal" style="animation-delay:.08s">
+      <div class="carry-emo">🪪</div>
+      <div class="carry-body">
+        <strong>Original Photo ID</strong>
+        <p>Must be original, valid, and non-expired — Aadhaar / E-Aadhaar / PAN / Passport / School ID / Class 12 Admit Card / Bank Passbook with photo.</p>
+        <span class="carry-badge">✅ Any One</span>
+      </div>
+    </div>
+
+    <div class="carry-card reveal" style="animation-delay:.12s">
+      <div class="carry-emo">📸</div>
+      <div class="carry-body">
+        <strong>Passport-Size Photograph</strong>
+        <p>Same photo as uploaded in the online application form. To be pasted on the attendance sheet in the exam room.</p>
+        <span class="carry-badge">✅ 1 Photo</span>
+      </div>
+    </div>
+
+    <div class="carry-card reveal" style="animation-delay:.16s">
+      <div class="carry-emo">🖊️</div>
+      <div class="carry-body">
+        <strong>Simple Transparent Ball Point Pen</strong>
+        <p>Only a simple, transparent ball-point pen is allowed. No gel pens, pencils, or multi-color pens.</p>
+        <span class="carry-badge">✅ Transparent only</span>
+      </div>
+    </div>
+
+    <div class="carry-card reveal" style="animation-delay:.20s">
+      <div class="carry-emo">♿</div>
+      <div class="carry-body">
+        <strong>PwD / PwBD Certificate</strong>
+        <p>If claiming relaxation under PwD/PwBD category — carry the certificate issued by the authorized medical officer.</p>
+        <span class="carry-badge">✅ If Applicable</span>
+      </div>
+    </div>
+
+    <div class="carry-card reveal" style="animation-delay:.24s">
+      <div class="carry-emo">🍌</div>
+      <div class="carry-body">
+        <strong>Sugar / Fruits (Diabetic Only)</strong>
+        <p>Diabetic candidates may carry sugar tablets or fruits like banana, apple, or orange inside the centre.</p>
+        <span class="carry-badge">✅ Diabetic Only</span>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /csec -->
+
+<!-- ════════════════════════════════════
+     ALERT — LATE ENTRY
+════════════════════════════════════ -->
+<div class="alert-wrap reveal">
+  <div class="alert warn">
+    <span class="alert-ico">⏰</span>
+    <div>
+      <strong>Report 2 Hours Before the Exam!</strong>
+      <p>Candidates wearing religious / customary / cultural dress should report at least 2 hours before the last reporting time so enough time is available for proper frisking.</p>
+    </div>
+  </div>
+  <div class="alert info">
+    <span class="alert-ico">📋</span>
+    <div>
+      <strong>Admit Cards are NOT sent by post</strong>
+      <p>Download and print your admit card from the NTA website: <strong>https://cuet.nta.nic.in</strong> — no physical card will be dispatched.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════
+     SECTION — WHAT NOT TO CARRY
+════════════════════════════════════ -->
+<div class="csec" style="margin-top:36px">
+  <div class="stitle reveal">
+    <div class="spill">🚫 Strictly Banned</div>
+    <h2>Items NOT Allowed Inside</h2>
+    <p>These are completely prohibited — no exceptions</p>
+  </div>
+
+  <div class="ban-grid">
+
+    <div class="ban-card reveal" style="animation-delay:.04s">
+      <div class="ban-emo">📱</div>
+      <div class="ban-body"><strong>Mobile Phone</strong><p>Any mobile, pager, or communication device</p></div>
+    </div>
+
+    <div class="ban-card reveal" style="animation-delay:.07s">
+      <div class="ban-emo">🎧</div>
+      <div class="ban-body"><strong>Earphones / Bluetooth</strong><p>All wireless & audio communication devices</p></div>
+    </div>
+
+    <div class="ban-card reveal" style="animation-delay:.1s">
+      <div class="ban-emo">⌚</div>
+      <div class="ban-body"><strong>Watch / Smartwatch</strong><p>Wristwatch, bracelet, or any timing device</p></div>
+    </div>
+
+    <div class="ban-card reveal" style="animation-delay:.13s">
+      <div class="ban-emo">🧮</div>
+      <div class="ban-body"><strong>Calculator</strong><p>Any calculator or slide rules / log tables</p></div>
+    </div>
+
+    <div class="ban-card reveal" style="animation-delay:.16s">
+      <div class="ban-emo">💼</div>
+      <div class="ban-body"><strong>Handbag / Purse</strong><p>No bags, pouches, or wallets of any kind</p></div>
+    </div>
+
+    <div class="ban-card reveal" style="animation-delay:.19s">
+      <div class="ban-emo">🕶️</div>
+      <div class="ban-body"><strong>Goggles / Sunglasses</strong><p>No eyewear other than prescription glasses</p></div>
+    </div>
+
+    <div class="ban-card reveal" style="animation-delay:.22s">
+      <div class="ban-emo">📏</div>
+      <div class="ban-body"><strong>Scale / Geometry Box</strong><p>Pen, pencil, eraser, scale — not allowed</p></div>
+    </div>
+
+    <div class="ban-card reveal" style="animation-delay:.25s">
+      <div class="ban-emo">💾</div>
+      <div class="ban-body"><strong>Pen Drive / DocuPen</strong><p>No USB drives, electronic pens or scanners</p></div>
+    </div>
+
+    <div class="ban-card reveal" style="animation-delay:.28s">
+      <div class="ban-emo">📷</div>
+      <div class="ban-body"><strong>Camera / Tape Recorder</strong><p>No cameras or recording devices of any kind</p></div>
+    </div>
+
+    <div class="ban-card reveal" style="animation-delay:.31s">
+      <div class="ban-emo">💍</div>
+      <div class="ban-body"><strong>Ornaments / Metal Items</strong><p>Rings, bangles, chains, pins — all banned</p></div>
+    </div>
+
+    <div class="ban-card reveal" style="animation-delay:.34s">
+      <div class="ban-emo">🥤</div>
+      <div class="ban-body"><strong>Food / Water Bottles</strong><p>No packed or open food items or water</p></div>
+    </div>
+
+    <div class="ban-card reveal" style="animation-delay:.37s">
+      <div class="ban-emo">🎽</div>
+      <div class="ban-body"><strong>Belt / Cap / Hat</strong><p>No belts, caps, hats, or metallic headwear</p></div>
+    </div>
+
+    <div class="ban-card reveal" style="animation-delay:.4s">
+      <div class="ban-emo">📄</div>
+      <div class="ban-body"><strong>Written / Printed Paper</strong><p>No notes, textual material, or chit papers</p></div>
+    </div>
+
+    <div class="ban-card reveal" style="animation-delay:.43s">
+      <div class="ban-emo">📡</div>
+      <div class="ban-body"><strong>Health Band / Microchip</strong><p>Any device capable of wireless communication</p></div>
+    </div>
+
+  </div>
+</div><!-- /csec -->
+
+<!-- ════════════════════════════════════
+     QUICK DO / DON'T RULES
+════════════════════════════════════ -->
+<div style="max-width:960px;margin:40px auto 10px;padding:0 20px">
+  <div class="stitle reveal">
+    <div class="spill">🎯 Quick Rules</div>
+    <h2>Inside the Exam Hall</h2>
+    <p>Key rules to follow once you enter the exam room</p>
+  </div>
+</div>
+<div class="qr-grid">
+  <div class="qr-card ok reveal" style="animation-delay:.05s">
+    <div class="qr-head">
+      <span class="qr-badge">
+        <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1.5 5.5l2.5 2.5 5.5-5.5" stroke="#15803D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Do This
+      </span>
+    </div>
+    <ul class="qr-list">
+      <li><span class="qdot">✓</span><span>Sit only on the seat allotted to you (Roll Number indicated)</span></li>
+      <li><span class="qdot">✓</span><span>Show admit card + ID on demand to invigilator</span></li>
+      <li><span class="qdot">✓</span><span>Paste your photo on the attendance sheet</span></li>
+      <li><span class="qdot">✓</span><span>Click Save & Next after every question</span></li>
+      <li><span class="qdot">✓</span><span>Write your name & application number on rough sheet</span></li>
+      <li><span class="qdot">✓</span><span>Submit rough sheet to invigilator before leaving</span></li>
+      <li><span class="qdot">✓</span><span>Report any technical issue to invigilator immediately</span></li>
+    </ul>
+  </div>
+  <div class="qr-card no reveal" style="animation-delay:.1s">
+    <div class="qr-head">
+      <span class="qr-badge">
+        <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 2l7 7M9 2L2 9" stroke="#B91C1C" stroke-width="1.8" stroke-linecap="round"/></svg>
+        Never Do This
+      </span>
+    </div>
+    <ul class="qr-list">
+      <li><span class="qdot">✗</span><span>Do NOT change your seat on your own</span></li>
+      <li><span class="qdot">✗</span><span>Do NOT talk or communicate with other candidates</span></li>
+      <li><span class="qdot">✗</span><span>Do NOT use any electronic device inside the hall</span></li>
+      <li><span class="qdot">✗</span><span>Do NOT take rough sheet outside the exam room</span></li>
+      <li><span class="qdot">✗</span><span>Do NOT look at another candidate's screen</span></li>
+      <li><span class="qdot">✗</span><span>Do NOT submit multiple application forms</span></li>
+      <li><span class="qdot">✗</span><span>Do NOT arrive late — late entry is not permitted</span></li>
+    </ul>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════
+     CTA
+════════════════════════════════════ -->
+<section class="cta reveal">
+  <div class="ctabox">
+    <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
+      <rect width="52" height="52" rx="15" fill="url(#ctag)"/>
+      <path d="M16 30l6 6 14-14" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <defs><linearGradient id="ctag" x1="0" y1="0" x2="52" y2="52"><stop stop-color="#7C3AED"/><stop offset="1" stop-color="#60A5FA"/></linearGradient></defs>
+    </svg>
+    <h3>All Set? Explore More Resources</h3>
+    <p>Try the CBT mock test or review the official dress code before your exam day.</p>
+    <div class="cta-btns">
+      <a class="ctabtn" href="https://commercesehoga.github.io/cuet" target="_blank" rel="noopener">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2.5l5 4.5-5 4.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Try CBT Mock Test
+      </a>
+      <a class="ctabtn out" href="https://commercesehoga.github.io/cuet/about/dress" target="_blank" rel="noopener">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2.5l5 4.5-5 4.5" stroke="#7C3AED" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Dress Code Guide
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════
+     FOOTER
+════════════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-row">
+      Made with care by
+      <a href="https://wondermayank.github.io" target="_blank" rel="noopener">Wondermayank</a>
+      &nbsp;·&nbsp;
+      Powered by
+      <a href="https://thunderstudy.in" target="_blank" rel="noopener">ThunderStudy</a>
+      &nbsp;·&nbsp; CUET 2026
+    </div>
+    <div style="margin-top:4px">
+      Based on the official
+      <a href="https://cuet.nta.nic.in" target="_blank" rel="noopener">NTA Information Bulletin</a>
+      &nbsp;·&nbsp; Helpline: 011-40759000
+    </div>
+  </div>
+</footer>
+
+</div><!-- /#main -->
+
+<script>
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('boot').classList.add('hide');
+    setTimeout(() => {
+      document.getElementById('boot').style.display = 'none';
+      document.getElementById('main').classList.add('show');
+    }, 680);
+  }, 2400);
+});
+
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
+  });
+}, {threshold: 0.08});
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
