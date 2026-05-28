@@ -1,47 +1,22 @@
-name: Deploy Thunderstudy to GitHub Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
     branches: [main]
-  workflow_dispatch:  # allow manual trigger
-
-# Required for GitHub Pages deployment
-permissions:
-  contents: read
-  pages: write
-  id-token: write
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
     steps:
-      # ── 1. Checkout your repo ──
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v3
 
-      # ── 2. Inject Supabase keys into index.html ──
-      #    Replaces the placeholder strings with real values from Secrets
-      - name: Inject Supabase environment keys
+      - name: Inject Supabase keys        # ← ADD THIS STEP
         run: |
           sed -i "s|YOUR_SUPABASE_URL|${{ secrets.SUPABASE_URL }}|g" index.html
           sed -i "s|YOUR_SUPABASE_ANON_KEY|${{ secrets.SUPABASE_ANON_KEY }}|g" index.html
-          echo "✓ Supabase keys injected"
 
-      # ── 3. Setup GitHub Pages ──
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
-      # ── 4. Upload site files ──
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: '.'  # upload entire repo root
-
-      # ── 5. Deploy to GitHub Pages ──
       - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
