@@ -3265,6 +3265,7 @@ async function toggleSBEnable(enable) {
 
 /**
  * Show the Supabase restore / cross-device fetch modal.
+ * Student ID tab: auto-fetches as you type (debounced 800ms).
  */
 async function openSBRestoreModal() {
   const old = document.getElementById('sb-restore-modal');
@@ -3298,19 +3299,20 @@ async function openSBRestoreModal() {
         </label>
         <label style="display:flex;align-items:center;gap:9px;cursor:pointer;font-size:13px;font-weight:700;">
           <input type="radio" name="sb-lookup" value="sid" ${!uid?'checked':''} style="accent-color:var(--acc);">
-          By Student ID (TS-XXXXX)
+          By Student ID — auto fetches as you type
         </label>
       </div>
-      <div style="margin-top:10px;" id="sb-sid-input-wrap" style="display:none;">
-        <input class="form-inp" id="sb-sid-inp" placeholder="Enter Student ID e.g. TS-00123"
-          value="${escH(sid)}" style="width:100%;margin-top:6px;">
+      <div style="margin-top:10px;${!uid?'':'display:none;'}" id="sb-sid-input-wrap">
+        <input class="form-inp" id="sb-sid-inp" placeholder="Enter Student ID e.g. G-WEQJCFPP"
+          value="${escH(sid)}" style="width:100%;margin-top:6px;" autocomplete="off">
+        <div id="sb-sid-preview" style="margin-top:10px;font-size:12px;display:none;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.25);border-radius:10px;padding:10px 13px;"></div>
       </div>
     </div>
 
     <div id="sb-restore-status" style="min-height:20px;font-size:12px;font-weight:600;margin-bottom:12px;text-align:center;"></div>
 
     <div style="display:flex;gap:8px;">
-      <button onclick="doSBRestore()" class="btn btn-prim" style="flex:1;justify-content:center;font-size:13px;">
+      <button id="sb-restore-btn" onclick="doSBRestore()" class="btn btn-prim" style="flex:1;justify-content:center;font-size:13px;">
         <svg class="ts-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
         Fetch & Restore
       </button>
@@ -3323,8 +3325,76 @@ async function openSBRestoreModal() {
     r.addEventListener('change', () => {
       const wrap = modal.querySelector('#sb-sid-input-wrap');
       if (wrap) wrap.style.display = r.value === 'sid' ? 'block' : 'none';
+      // Clear preview when switching
+      const preview = modal.querySelector('#sb-sid-preview');
+      if (preview) { preview.style.display = 'none'; preview.innerHTML = ''; }
+      modal.querySelector('#sb-restore-status').innerHTML = '';
     });
   });
+
+  // ── Auto-fetch as user types Student ID ──
+  // SECURITY: Restore button is disabled until we confirm the typed ID matches this device's own stored ID
+  const myOwnSid = localStorage.getItem('ts_student_id') || '';
+  const restoreBtn = modal.querySelector('#sb-restore-btn');
+  restoreBtn.disabled = true;
+  restoreBtn.style.opacity = '0.4';
+  restoreBtn.title = 'Enter your own Student ID to enable restore';
+
+  let _autoFetchTimer = null;
+  const sidInp = modal.querySelector('#sb-sid-inp');
+  sidInp.addEventListener('input', () => {
+    const val = sidInp.value.trim();
+    const st  = modal.querySelector('#sb-restore-status');
+    const preview = modal.querySelector('#sb-sid-preview');
+    clearTimeout(_autoFetchTimer);
+    preview.style.display = 'none';
+    preview.innerHTML = '';
+    restoreBtn.disabled = true;
+    restoreBtn.style.opacity = '0.4';
+    if (val.length < 3) { st.innerHTML = ''; return; }
+
+    // SECURITY: block if typed ID doesn't match this device's own stored Student ID
+    if (myOwnSid && val.toUpperCase() !== myOwnSid.toUpperCase()) {
+      st.innerHTML = '<span style="color:var(--red)">⛔ You can only restore your own Student ID</span>';
+      return;
+    }
+
+    st.innerHTML = '<span style="color:var(--acc)">⏳ Looking up…</span>';
+    _autoFetchTimer = setTimeout(async () => {
+      const res = await supabaseFetch('', val);
+      if (res.ok && res.data) {
+        const d = res.data;
+        // SECURITY: double-check returned row's student_id also matches own ID
+        const returnedSid = (d.student_id || '').toUpperCase();
+        const ownSid      = myOwnSid.toUpperCase();
+        if (myOwnSid && returnedSid && returnedSid !== ownSid) {
+          st.innerHTML = '<span style="color:var(--red)">⛔ Data mismatch — cannot restore another student\'s data</span>';
+          return;
+        }
+        preview.innerHTML = `
+          <div style="font-weight:800;color:var(--green);margin-bottom:4px;">✅ Your data found — ready to restore</div>
+          <div style="color:var(--text2);line-height:1.8;">
+            👤 <b>${escH(d.name||'Unknown')}</b><br>
+            🎯 HP: <b>${d.hp||0}</b> &nbsp;|&nbsp; XP: <b>${d.xp||0}</b> &nbsp;|&nbsp; Rank: <b>${escH(d.rp_rank||'Rookie')}</b><br>
+            🕒 Saved: <b>${d.saved_at ? new Date(d.saved_at).toLocaleString() : '—'}</b>
+          </div>`;
+        preview.style.display = 'block';
+        st.innerHTML = '';
+        // Only unlock restore button after confirming it's their own data
+        restoreBtn.disabled = false;
+        restoreBtn.style.opacity = '1';
+        restoreBtn.title = '';
+      } else {
+        preview.style.display = 'none';
+        st.innerHTML = `<span style="color:var(--red)">❌ No data found for "${escH(val)}"</span>`;
+      }
+    }, 800);
+  });
+
+  // If sid already filled and matches own ID, trigger auto-fetch immediately
+  if (sid && !uid && sid === myOwnSid) {
+    setTimeout(() => sidInp.dispatchEvent(new Event('input')), 400);
+  }
 
   modal.addEventListener('click', e => { if(e.target===modal) modal.remove(); });
   document.body.appendChild(modal);
@@ -3332,11 +3402,20 @@ async function openSBRestoreModal() {
 
 async function doSBRestore() {
   const st = document.getElementById('sb-restore-status');
-  st.innerHTML = '<span style="color:var(--acc)">⏳ Fetching from Supabase…</span>';
   const method = document.querySelector('input[name="sb-lookup"]:checked')?.value || 'uid';
   const uid = fbAuth.currentUser?.uid || '';
   const sid = document.getElementById('sb-sid-inp')?.value?.trim() || localStorage.getItem('ts_student_id') || '';
 
+  // SECURITY: Final check before restoring — must be own Student ID
+  if (method === 'sid') {
+    const myOwnSid = localStorage.getItem('ts_student_id') || '';
+    if (myOwnSid && sid.toUpperCase() !== myOwnSid.toUpperCase()) {
+      st.innerHTML = '<span style="color:var(--red)">⛔ You can only restore your own Student ID</span>';
+      return;
+    }
+  }
+
+  st.innerHTML = '<span style="color:var(--acc)">⏳ Fetching from Supabase…</span>';
   const res = await supabaseRestore(method === 'uid' ? uid : '', method === 'uid' ? '' : sid);
   if (res.ok) {
     st.innerHTML = `<span style="color:var(--green)">✅ Restored! Name: ${escH(res.data.name||'')}, HP: ${res.data.hp||0}, XP: ${res.data.xp||0}</span>`;
