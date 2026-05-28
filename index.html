@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en-IN">
     
@@ -59,6 +60,8 @@
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-messaging-compat.js"></script>
+<!-- Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 
 /* ── TS SVG ICON SYSTEM ── */
@@ -3054,6 +3057,347 @@ function scheduleAutoCloudSync() {
     if (user) cloudSave(user.uid, true);
   }, CLOUD_SYNC_DEBOUNCE_MS);
 }
+
+/* ══════════════════════════════════════════
+   SUPABASE — Full Database Backup System
+   ─────────────────────────────────────────
+   Table: student_data  (see setup SQL below)
+   • OFF by default — user enables in Settings
+   • When enabled: prompts Google sign-in first
+   • Auto-saves every new localStorage write
+   • Fetches data by Google UID or Student ID
+   • Works cross-device via UID or student_id
+══════════════════════════════════════════ */
+const SUPABASE_URL  = 'YOUR_SUPABASE_URL';      // injected by GitHub Actions
+const SUPABASE_ANON = 'YOUR_SUPABASE_ANON_KEY'; // injected by GitHub Actions
+
+let _sbClient = null;
+
+function getSBClient() {
+  if (!_sbClient && SUPABASE_URL !== 'YOUR_SUPABASE_URL') {
+    _sbClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+  }
+  return _sbClient;
+}
+
+/* ── Setting helpers ── */
+function isSBEnabled()   { return localStorage.getItem('ts_supabase_enabled') === '1'; }
+function enableSB()      { localStorage.setItem('ts_supabase_enabled', '1'); }
+function disableSB()     { localStorage.removeItem('ts_supabase_enabled'); }
+
+/* ── Build the full payload to save ── */
+function buildSBPayload(uid) {
+  const hpRaw   = localStorage.getItem('ts_hp')      || '{"total":0,"log":[]}';
+  const rpRaw   = localStorage.getItem('ts_rp_data') || '{"rankIndex":0,"rp":0,"consecutiveBad":0,"log":[]}';
+  const bonusXP = parseInt(localStorage.getItem('ts_bonus_xp') || '0', 10);
+
+  let hp = 0, rpRank = 'Rookie', rpPoints = 0, rankIndex = 0;
+  try { hp = JSON.parse(hpRaw).total || 0; } catch(e) {}
+  try {
+    const rpd = JSON.parse(rpRaw);
+    rpPoints  = rpd.rp        || 0;
+    rankIndex = rpd.rankIndex || 0;
+    rpRank    = (typeof RANK_TIERS !== 'undefined' && RANK_TIERS[rankIndex]) ? RANK_TIERS[rankIndex].name : 'Rookie';
+  } catch(e) {}
+
+  let testXP = 0;
+  try { getAllAtt().forEach(a => { if (a.xp) testXP += a.xp; }); } catch(e) {}
+  const totalXP = testXP + bonusXP;
+
+  const profile   = getProfile();
+  const name      = profile.name || localStorage.getItem('cbtUserName') || 'Student';
+  const studentId = localStorage.getItem('ts_student_id') || '';
+  const regNo     = localStorage.getItem('ts_reg_no') || '';
+
+  // Collect ALL result keys for full restore
+  const allResults = {};
+  for (let i = 0; i < localStorage.length; i++) {
+    const k = localStorage.key(i);
+    if (k && (k.startsWith('thunderstudy_result_') || k.startsWith('thunderstudy_history_'))) {
+      allResults[k] = localStorage.getItem(k);
+    }
+  }
+  // Collect gamification keys
+  const gamData = {};
+  ['ts_hp','ts_rp_data','ts_bonus_xp','ts_rp_processed','ts_rp_init',
+   'ts_hp_sections','ts_hp_certs','ts_promos_used','ts_subs','ts_streak'].forEach(k => {
+    const v = localStorage.getItem(k);
+    if (v !== null) gamData[k] = v;
+  });
+
+  return {
+    uid,
+    student_id : studentId,
+    reg_no     : regNo,
+    name,
+    hp,
+    xp         : totalXP,
+    rp_rank    : rpRank,
+    rp_points  : rpPoints,
+    hp_raw     : hpRaw,
+    rp_raw     : rpRaw,
+    gam_data   : JSON.stringify(gamData),
+    results    : JSON.stringify(allResults),
+    saved_at   : new Date().toISOString()
+  };
+}
+
+/**
+ * Save everything to Supabase.
+ * Only runs if SB is enabled and user is signed in.
+ * @param {string} uid — Firebase UID
+ * @param {boolean} silent — suppress toast
+ */
+async function supabaseSave(uid, silent) {
+  if (!isSBEnabled()) return { ok: false, msg: 'Supabase backup is disabled' };
+  const sb = getSBClient();
+  if (!sb) return { ok: false, msg: 'Supabase not configured (check env keys)' };
+  if (!uid) return { ok: false, msg: 'Not signed in — cannot save to Supabase' };
+
+  try {
+    const payload = buildSBPayload(uid);
+    const { error } = await sb
+      .from('student_data')
+      .upsert(payload, { onConflict: 'uid' });
+    if (error) throw new Error(error.message);
+    if (!silent) showToast('<svg class="ts-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/></svg> All data backed up to Supabase!', 'success');
+    localStorage.setItem('ts_sb_last_save', new Date().toISOString());
+    console.log('[Supabase] Saved ✓', { uid, name: payload.name, hp: payload.hp, xp: payload.xp });
+    return { ok: true };
+  } catch (e) {
+    console.warn('[Supabase] Save failed:', e.message);
+    if (!silent) showToast('⚠️ Supabase backup failed: ' + e.message, 'error');
+    return { ok: false, msg: e.message };
+  }
+}
+
+/**
+ * Fetch student data from Supabase.
+ * Tries by UID first, then falls back to student_id.
+ * @param {string} uid — Firebase UID (primary)
+ * @param {string} studentId — TS-XXXXX fallback
+ */
+async function supabaseFetch(uid, studentId) {
+  const sb = getSBClient();
+  if (!sb) return { ok: false, data: null, msg: 'Supabase not configured' };
+  try {
+    let query = sb.from('student_data').select('*');
+    if (uid) {
+      query = query.eq('uid', uid);
+    } else if (studentId) {
+      query = query.eq('student_id', studentId);
+    } else {
+      return { ok: false, data: null, msg: 'No UID or Student ID provided' };
+    }
+    const { data, error } = await query.maybeSingle();
+    if (error) throw new Error(error.message);
+    return { ok: true, data: data || null };
+  } catch (e) {
+    return { ok: false, msg: e.message, data: null };
+  }
+}
+
+/**
+ * Restore all data from a Supabase row to localStorage.
+ * Called when user logs in on a new device.
+ */
+async function supabaseRestore(uid, studentId) {
+  const res = await supabaseFetch(uid, studentId);
+  if (!res.ok || !res.data) return { ok: false, msg: res.msg || 'No data found in Supabase' };
+  const d = res.data;
+
+  // Restore gamification
+  if (d.gam_data) {
+    try {
+      const gam = JSON.parse(d.gam_data);
+      Object.entries(gam).forEach(([k,v]) => { if(v!==null) localStorage.setItem(k, v); });
+    } catch(e) {}
+  }
+  // Restore test results
+  if (d.results) {
+    try {
+      const results = JSON.parse(d.results);
+      Object.entries(results).forEach(([k,v]) => { if(v!==null) localStorage.setItem(k, v); });
+    } catch(e) {}
+  }
+  // Restore identity
+  if (d.student_id) localStorage.setItem('ts_student_id', d.student_id);
+  if (d.reg_no)     localStorage.setItem('ts_reg_no', d.reg_no);
+  if (d.name)       localStorage.setItem('cbtUserName', d.name);
+  if (d.hp_raw)     localStorage.setItem('ts_hp', d.hp_raw);
+  if (d.rp_raw)     localStorage.setItem('ts_rp_data', d.rp_raw);
+
+  invalidateAttCache();
+  return { ok: true, data: d };
+}
+
+/**
+ * Toggle Supabase backup ON — called from Settings switch.
+ * If not signed in, prompts Google sign-in first.
+ */
+async function toggleSBEnable(enable) {
+  if (!enable) {
+    disableSB();
+    renderSettings();
+    showToast('Supabase backup disabled', 'info');
+    return;
+  }
+  // Check Google sign-in
+  const user = fbAuth.currentUser;
+  if (!user) {
+    const confirmed = confirm(
+      'Supabase backup requires Google Sign-In so your data can be linked to your account.\n\nSign in with Google now?'
+    );
+    if (confirmed) {
+      goLoginPage();
+      // Flag: after sign-in, auto-enable SB
+      localStorage.setItem('ts_sb_pending_enable', '1');
+    }
+    // Revert the toggle visually
+    const tog = document.getElementById('sb-toggle');
+    if (tog) tog.checked = false;
+    return;
+  }
+  enableSB();
+  renderSettings();
+  showToast('<svg class="ts-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/></svg> Supabase backup enabled! Saving now…', 'success');
+  // Immediate first save
+  await supabaseSave(user.uid, true);
+}
+
+/**
+ * Show the Supabase restore / cross-device fetch modal.
+ */
+async function openSBRestoreModal() {
+  const old = document.getElementById('sb-restore-modal');
+  if (old) old.remove();
+
+  const uid = fbAuth.currentUser?.uid || '';
+  const sid = localStorage.getItem('ts_student_id') || '';
+
+  const modal = document.createElement('div');
+  modal.id = 'sb-restore-modal';
+  modal.style.cssText = 'position:fixed;inset:0;z-index:10100;background:rgba(0,0,0,.5);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:16px;';
+  modal.innerHTML = `
+  <div style="background:var(--card);border-radius:24px;padding:26px;max-width:480px;width:100%;border:1px solid var(--border);animation:mIn .3s cubic-bezier(.34,1.56,.64,1);">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;">
+      <div>
+        <div style="font-size:17px;font-weight:900;">
+          <svg class="ts-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/></svg>
+          Restore from Supabase
+        </div>
+        <div style="font-size:11px;color:var(--text3);margin-top:3px;">Fetch your data from another device</div>
+      </div>
+      <span onclick="document.getElementById('sb-restore-modal').remove()" style="cursor:pointer;font-size:26px;color:var(--text3);">×</span>
+    </div>
+
+    <div style="background:rgba(79,110,247,.07);border:1.5px solid rgba(79,110,247,.2);border-radius:14px;padding:14px 16px;margin-bottom:14px;">
+      <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--acc);margin-bottom:10px;">Lookup Method</div>
+      <div style="display:flex;flex-direction:column;gap:9px;">
+        <label style="display:flex;align-items:center;gap:9px;cursor:pointer;font-size:13px;font-weight:700;">
+          <input type="radio" name="sb-lookup" value="uid" ${uid?'checked':''} style="accent-color:var(--acc);">
+          By Google Account (UID) — most reliable
+        </label>
+        <label style="display:flex;align-items:center;gap:9px;cursor:pointer;font-size:13px;font-weight:700;">
+          <input type="radio" name="sb-lookup" value="sid" ${!uid?'checked':''} style="accent-color:var(--acc);">
+          By Student ID (TS-XXXXX)
+        </label>
+      </div>
+      <div style="margin-top:10px;" id="sb-sid-input-wrap" style="display:none;">
+        <input class="form-inp" id="sb-sid-inp" placeholder="Enter Student ID e.g. TS-00123"
+          value="${escH(sid)}" style="width:100%;margin-top:6px;">
+      </div>
+    </div>
+
+    <div id="sb-restore-status" style="min-height:20px;font-size:12px;font-weight:600;margin-bottom:12px;text-align:center;"></div>
+
+    <div style="display:flex;gap:8px;">
+      <button onclick="doSBRestore()" class="btn btn-prim" style="flex:1;justify-content:center;font-size:13px;">
+        <svg class="ts-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+        Fetch & Restore
+      </button>
+      <button onclick="document.getElementById('sb-restore-modal').remove()" class="btn btn-ghost" style="flex:1;justify-content:center;font-size:13px;">Cancel</button>
+    </div>
+  </div>`;
+
+  // Show/hide student ID input based on radio
+  modal.querySelectorAll('input[name="sb-lookup"]').forEach(r => {
+    r.addEventListener('change', () => {
+      const wrap = modal.querySelector('#sb-sid-input-wrap');
+      if (wrap) wrap.style.display = r.value === 'sid' ? 'block' : 'none';
+    });
+  });
+
+  modal.addEventListener('click', e => { if(e.target===modal) modal.remove(); });
+  document.body.appendChild(modal);
+}
+
+async function doSBRestore() {
+  const st = document.getElementById('sb-restore-status');
+  st.innerHTML = '<span style="color:var(--acc)">⏳ Fetching from Supabase…</span>';
+  const method = document.querySelector('input[name="sb-lookup"]:checked')?.value || 'uid';
+  const uid = fbAuth.currentUser?.uid || '';
+  const sid = document.getElementById('sb-sid-inp')?.value?.trim() || localStorage.getItem('ts_student_id') || '';
+
+  const res = await supabaseRestore(method === 'uid' ? uid : '', method === 'uid' ? '' : sid);
+  if (res.ok) {
+    st.innerHTML = `<span style="color:var(--green)">✅ Restored! Name: ${escH(res.data.name||'')}, HP: ${res.data.hp||0}, XP: ${res.data.xp||0}</span>`;
+    setTimeout(() => {
+      document.getElementById('sb-restore-modal')?.remove();
+      location.reload();
+    }, 2000);
+  } else {
+    st.innerHTML = `<span style="color:var(--red)">❌ ${escH(res.msg||'Not found')}</span>`;
+  }
+}
+
+/* ── Patch cloudSave: every Firebase save also silently backs up to Supabase ── */
+const _origCloudSave = cloudSave;
+cloudSave = async function(uid, silent) {
+  const result = await _origCloudSave(uid, silent);
+  if (isSBEnabled()) {
+    supabaseSave(uid, true).catch(() => {});
+  }
+  return result;
+};
+
+/* ── After Google sign-in, check if SB enable was pending ── */
+const _origApplyGoogleUser = typeof applyGoogleUserAfterConflict !== 'undefined'
+  ? applyGoogleUserAfterConflict : null;
+
+fbAuth.onAuthStateChanged(function(user) {
+  if (user && localStorage.getItem('ts_sb_pending_enable') === '1') {
+    localStorage.removeItem('ts_sb_pending_enable');
+    enableSB();
+    supabaseSave(user.uid, false).catch(() => {});
+    if (typeof renderSettings === 'function') setTimeout(renderSettings, 500);
+  }
+  if (user && isSBEnabled()) {
+    // Auto-save on login
+    supabaseSave(user.uid, true).catch(() => {});
+  }
+});
+
+/* ── Auto-save to Supabase when any ts_ key changes in localStorage ── */
+const _origLSSetItem = localStorage.setItem.bind(localStorage);
+localStorage.setItem = function(key, value) {
+  _origLSSetItem(key, value);
+  // Only trigger for data keys, not meta/status keys
+  if (isSBEnabled() &&
+      (key.startsWith('thunderstudy_result_') || key.startsWith('ts_hp') ||
+       key.startsWith('ts_rp') || key.startsWith('ts_bonus_xp') ||
+       key.startsWith('ts_hp_sections') || key.startsWith('ts_subs')) ) {
+    const user = fbAuth?.currentUser;
+    if (user) {
+      clearTimeout(window._sbAutoSaveTimer);
+      window._sbAutoSaveTimer = setTimeout(() => {
+        supabaseSave(user.uid, true).catch(() => {});
+      }, 4000); // debounce 4s
+    }
+  }
+};
+
+
 
 function updateCloudStatusUI(status) {
   const els = document.querySelectorAll('.cloud-status-dot');
@@ -8957,6 +9301,70 @@ function renderSettings(){
 <button class="btn btn-ghost" id="cloud-fetch-btn" onclick="cloudFetchFromSettings()" style="flex:1;justify-content:center;font-size:12px;"><svg class="ts-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg> Restore / Compare Cloud</button>    </div>
     <div id="cloud-settings-status" style="font-size:12px;font-weight:600;min-height:16px;margin-top:8px;text-align:center;"></div>
     `}
+  </div>`;
+
+  // ── 3b. SUPABASE DATABASE BACKUP ──
+  const sbEnabled = isSBEnabled();
+  const sbLastSave = localStorage.getItem('ts_sb_last_save');
+  const sbLastSaveStr = sbLastSave
+    ? new Date(sbLastSave).toLocaleString('en-IN', {day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'})
+    : 'Never';
+  const sbConfigured = (SUPABASE_URL !== 'YOUR_SUPABASE_URL');
+  H+=`
+  <div class="card card-p" style="margin-bottom:14px;background:linear-gradient(135deg,rgba(16,185,129,.06),rgba(6,182,212,.04));border:1.5px solid rgba(16,185,129,.2);">
+    <div class="sec-hdr" style="margin-bottom:12px;">
+      <div class="sec-title" style="color:var(--green);">
+        <svg class="ts-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+        Supabase Database Backup
+      </div>
+      <label style="display:flex;align-items:center;gap:7px;cursor:pointer;flex-shrink:0;" title="${sbConfigured?'Toggle Supabase backup':'Supabase not configured — add keys in GitHub Secrets'}">
+        <input type="checkbox" id="sb-toggle"
+          ${sbEnabled?'checked':''}
+          ${!sbConfigured?'disabled title="Supabase keys not set — configure via GitHub Secrets"':''}
+          onchange="toggleSBEnable(this.checked)"
+          style="width:16px;height:16px;accent-color:var(--green);cursor:pointer;">
+        <span style="font-size:11px;font-weight:800;color:${sbEnabled?'var(--green)':'var(--text3)'};">${sbEnabled?'ON':'OFF'}</span>
+      </label>
+    </div>
+    ${!sbConfigured ? `
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(245,158,11,.3);border-radius:12px;padding:10px 13px;font-size:12px;color:var(--yellow);font-weight:700;margin-bottom:10px;">
+      ⚠️ Supabase keys not configured. Add <code>SUPABASE_URL</code> and <code>SUPABASE_ANON_KEY</code> to GitHub Secrets and redeploy.
+    </div>` : ''}
+    <div style="font-size:12px;color:var(--text3);margin-bottom:12px;line-height:1.7;">
+      Backup <strong style="color:var(--text)">HP, XP, RP, Student ID, Reg No &amp; all test results</strong> to Supabase database.
+      Works cross-device — sign in anywhere to restore.
+      <br><span style="color:var(--text3);">• OFF by default &nbsp;• Requires Google Sign-In &nbsp;• Auto-saves on every result</span>
+    </div>
+    ${sbEnabled ? `
+    <div style="background:rgba(16,185,129,.08);border:1.5px solid rgba(16,185,129,.2);border-radius:12px;padding:10px 14px;margin-bottom:12px;display:flex;align-items:center;gap:10px;">
+      <svg class="ts-svg-icon" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      <div>
+        <div style="font-size:13px;font-weight:800;color:var(--green);">Backup Active</div>
+        <div style="font-size:10px;color:var(--text3);">Last saved: ${sbLastSaveStr}</div>
+      </div>
+      <div style="margin-left:auto;font-size:10px;background:rgba(16,185,129,.15);border-radius:20px;padding:3px 9px;font-weight:700;color:var(--green);">AUTO</div>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <button onclick="(async()=>{const u=fbAuth.currentUser;if(u)await supabaseSave(u.uid,false);else showToast('Sign in with Google first','error');})()" class="btn btn-prim" style="flex:1;justify-content:center;font-size:12px;background:linear-gradient(135deg,#10b981,#06b6d4);">
+        <svg class="ts-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/></svg>
+        Save Now
+      </button>
+      <button onclick="openSBRestoreModal()" class="btn btn-ghost" style="flex:1;justify-content:center;font-size:12px;">
+        <svg class="ts-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+        Restore / Cross-Device
+      </button>
+    </div>` : `
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <button onclick="openSBRestoreModal()" class="btn btn-ghost" style="flex:1;justify-content:center;font-size:12px;" ${!sbConfigured?'disabled':''}>
+        <svg class="ts-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+        Restore from Another Device
+      </button>
+    </div>`}
+    <div style="margin-top:10px;font-size:10px;color:var(--text3);text-align:center;line-height:1.6;">
+      Student ID: <strong style="color:var(--text);font-family:var(--mono);">${localStorage.getItem('ts_student_id')||'—'}</strong>
+      &nbsp;·&nbsp;
+      Reg No: <strong style="color:var(--text);font-family:var(--mono);">${localStorage.getItem('ts_reg_no')||'—'}</strong>
+    </div>
   </div>`;
 
   // ── 4. GOOGLE SHEET SYNC ──
