@@ -4,13 +4,16 @@ on:
   push:
     branches: [main]
 
+permissions:          # ← ADD THIS BLOCK
+  contents: write
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
 
-      - name: Inject Supabase keys        # ← ADD THIS STEP
+      - name: Inject Supabase keys
         run: |
           sed -i "s|YOUR_SUPABASE_URL|${{ secrets.SUPABASE_URL }}|g" index.html
           sed -i "s|YOUR_SUPABASE_ANON_KEY|${{ secrets.SUPABASE_ANON_KEY }}|g" index.html
